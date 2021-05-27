@@ -1,15 +1,15 @@
-const money = document.querySelector('#money');
+let money
 
-const income = document.querySelector('#income');
+let income
 
-const addExpenses = document.querySelector('#addExpenses');
+let addExpenses
 
-const deposit = document.querySelector('#deposit');
+let deposit
 
-const mission = document.querySelector('#mission');
+let mission
 
-const period = 30;
+let period
 
 alert('Выполняем задание Урока №1.');
 
-console.log(mission);
+console.log('Hello, Friends!');
