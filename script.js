@@ -1,14 +1,14 @@
-let money
+let money;
 
-let income
+let income;
 
-let addExpenses
+let addExpenses;
 
-let deposit
+let deposit;
 
-let mission
+let mission;
 
-let period
+let period;
 
 alert('Выполняем задание Урока №1.');
 
