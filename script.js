@@ -1,13 +1,18 @@
 'use strict';
-
-let num = 266219;
-
-let multResult = num
+const num = 266219;
+const multResult = num
   .toString()
   .split('')
   .reduce((total, amount) => total * amount);
 console.log(multResult);
 
-let degResult = multResult ** 3;
+const degResult = multResult ** 3;
+console.log(degResult.toString().substring(0, 2));
 
-console.log(String(degResult).slice(0, 2));
+// Вариант с использованием цикала для получения произведения цифр числа
+const strNum = num.toString();
+let mult = 1;
+for (let i = 0; i < strNum.length; i++) {
+  mult *= strNum[i];
+}
+console.log(mult);
