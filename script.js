@@ -15,7 +15,7 @@ let income = 'Фриланс';
 let lowerCase = addExpenses.toLocaleLowerCase();
 let showArray = lowerCase.split(', ');
 
-let levelBudgetDay = if (budgetDay >= 1200) {
+if (budgetDay >= 1200) {
   console.log('У Вас высокий уровень дохода');
 } else if (budgetDay >= 600 && budgetDay <= 1200) {
   console.log('У Вас средний уровень дохода');
