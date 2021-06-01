@@ -4,6 +4,7 @@ let lang = 'ru';
 let langOutput1;
 let langOutput2;
 let langOutput3 = [['Пн, Вт, Ср, Чт, Пт, Сб, Вс'], ['Mon, Tue, Wed, Thu, Fri, Sat, Sun']];
+let namePerson = 'Артем';
 
 if (lang === 'ru') {
   langOutput1 = 'Пн, Вт, Ср, Чт, Пт, Сб, Вс';
