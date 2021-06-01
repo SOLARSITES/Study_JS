@@ -1,10 +1,14 @@
 'use strict';
 
-const stringOptimize = function (outputString) {
-  if (typeof outputString !== 'string') {
+const stringOptimize = function (data) {
+  if (typeof data !== 'string') {
     return 'Данное значение не является строкой!';
   } else {
-    return outputString.trim().slice(0, 30) + '...';
+    let rawString = data.trim();
+    let outputString = rawString.slice(0, 30);
+    if (outputString.length < rawString.length) {
+      return (outputString += '...');
+    }
   }
 };
 
@@ -12,3 +16,4 @@ console.log(stringOptimize(8));
 console.log(
   stringOptimize('   Взошло солнце и открыло вокруг необыкновенную чистоту и свежесть.   '),
 );
+console.log(stringOptimize('   Взошло солнце   '));
