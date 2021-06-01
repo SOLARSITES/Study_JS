@@ -5,6 +5,8 @@ let langOutput1;
 let langOutput2;
 let langOutput3 = [['Пн, Вт, Ср, Чт, Пт, Сб, Вс'], ['Mon, Tue, Wed, Thu, Fri, Sat, Sun']];
 let namePerson = 'Артем';
+let outputNamePerson =
+  namePerson === 'Артем' ? 'директор' : namePerson === 'Максим' ? 'преподаватель' : 'студент';
 
 if (lang === 'ru') {
   langOutput1 = 'Пн, Вт, Ср, Чт, Пт, Сб, Вс';
@@ -22,3 +24,4 @@ switch (lang) {
 console.log(langOutput1);
 console.log(langOutput2);
 console.log(langOutput3[0].toString());
+console.log(outputNamePerson);
