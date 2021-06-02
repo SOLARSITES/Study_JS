@@ -68,6 +68,5 @@ console.log(showAddExpenses);
 getTargetMonth() >= 0
   ? console.log('Цель будет достигнута за ' + getTargetMonth() + ' месяцев(-а)')
   : console.log('Цель не будет достигнута');
-
 console.log('Бюджет на день: ' + budgetDay);
 console.log(getStatusIncome());
