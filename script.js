@@ -8,6 +8,8 @@ const stringOptimize = function (data) {
     let outputString = rawString.slice(0, 30);
     if (outputString.length < rawString.length) {
       return (outputString += '...');
+    } else {
+      return outputString;
     }
   }
 };
