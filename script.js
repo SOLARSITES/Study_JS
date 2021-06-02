@@ -1,17 +1,17 @@
 'use strict';
 
-const stringOptimize = function (data) {
-  if (typeof data !== 'string') {
-    return 'Данное значение не является строкой!';
-  } else {
-    let rawString = data.trim();
-    let outputString = rawString.slice(0, 30);
-    if (outputString.length < rawString.length) {
-      return (outputString += '...');
+const stringOptimize = function (rawString) {
+  let outputString = 'Данное значение не является строкой!';
+  if (typeof rawString === 'string') {
+    let maxString = 30;
+    let trimString = rawString.trim();
+    if (trimString.length > maxString) {
+      outputString = trimString.slice(0, 30) + '...';
     } else {
-      return outputString;
+      outputString = trimString;
     }
   }
+  return outputString;
 };
 
 console.log(stringOptimize(8));
