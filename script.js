@@ -23,24 +23,18 @@ let appData = {
       'Перечислите возможные расходы за рассчитываемый период через запятую',
       'Транспорт, коммуналка, интернет',
     );
-    // let sum = 0;
-    // let count;
 
     appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
     appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
     for (let i = 0; i < 2; i++) {
-      const question = prompt('Введите обязательную статью расходов?');
-      const sum = +prompt('Во сколько это обойдется?');
+      let question = prompt('Введите обязательную статью расходов?');
+      let sum = prompt('Во сколько это обойдется?');
+      do {
+        sum = prompt('Во сколько это обойдется?');
+      } while (!isNumber(sum));
       appData.expenses[question] = sum;
-
-      // appData.expenses = prompt('Введите обязательную статью расходов?');
-      // do {
-      //   count = prompt('Во сколько это обойдется?');
-      // } while (!isNumber(count));
-      // sum = Number(sum) + Number(count);
     }
-    // return sum;
   },
   getExpensesMonth: function () {
     for (let item in appData.expenses) {
@@ -74,7 +68,7 @@ isNumber = function (n) {
 
 let start = function () {
   do {
-    appData.budget = prompt('Ваш месячный доход?');
+    money = prompt('Ваш месячный доход?');
   } while (!isNumber(money));
 };
 
@@ -82,14 +76,12 @@ appData.asking();
 start();
 appData.getExpensesMonth();
 appData.getBudget();
-// budgetDay = Math.floor(accumulatedMonth / 30);
 
 appData.getTargetMonth() >= 0
   ? console.log('Цель будет достигнута за ' + appData.getTargetMonth() + ' месяцев(-а)')
   : console.log('Цель не будет достигнута');
 
-console.log(appData.expensesMonth);
+console.log('Расходы за месяц: ', appData.expensesMonth);
 console.log(appData.addExpenses);
 console.log('Бюджет на день: ' + appData.budgetDay);
 console.log(appData.getStatusIncome());
-// console.log(appData.expenses);
