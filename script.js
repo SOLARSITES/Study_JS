@@ -1,7 +1,19 @@
 'use strict';
 
-let isNumber;
 let money;
+
+let isNumber = function (n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+let start = function () {
+  do {
+    money = prompt('Ваш месячный доход?');
+  } while (!isNumber(money));
+};
+
+start();
+
 let appData = {
   budget: money, // Доход за месяц
   budgetDay: 0, // budget / 30
@@ -25,7 +37,7 @@ let appData = {
 
     for (let i = 0; i < 2; i++) {
       let question = prompt('Введите обязательную статью расходов?');
-      let sum = prompt('Во сколько это обойдется?');
+      let sum;
       do {
         sum = prompt('Во сколько это обойдется?');
       } while (!isNumber(sum));
@@ -57,24 +69,7 @@ let appData = {
   },
 };
 
-isNumber = function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
-
-let start = function () {
-  do {
-    money = prompt('Ваш месячный доход?');
-  } while (!isNumber(money));
-};
-
-// let pullAppData = function () {
-//   for (let item in appData) {
-//     console.log(item + ':' + appData[item]);
-//   }
-// };
-
 appData.asking();
-start();
 appData.getExpensesMonth();
 appData.getBudget();
 
@@ -83,12 +78,8 @@ appData.getTargetMonth() >= 0
   : console.log('Цель не будет достигнута');
 
 console.log('Расходы за месяц: ' + appData.expensesMonth);
-console.log('Уровень дохода: ' + appData.getStatusIncome());
-console.log('Бюджет на день: ' + appData.budgetDay);
-console.log('');
-// console.log('Наша программа включает в себя данные: ' + '\n' + pullAppData);
-
-// console.log('Наша программа включает в себя данные: ');
-// for (let item in appData) {
-//   console.log(item, appData[item]);
-// }
+console.log(appData.getStatusIncome());
+console.log('Наша программа включает в себя данные:');
+for (let item in appData) {
+  console.log(item + ': ' + appData[item]);
+}
