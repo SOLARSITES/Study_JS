@@ -29,7 +29,7 @@ let appData = {
       do {
         sum = prompt('Во сколько это обойдется?');
       } while (!isNumber(sum));
-      appData.expenses[question] = sum;
+      appData.expenses[question] = Number(sum);
     }
   },
   getExpensesMonth: function () {
@@ -67,6 +67,12 @@ let start = function () {
   } while (!isNumber(money));
 };
 
+// let pullAppData = function () {
+//   for (let item in appData) {
+//     console.log(item + ':' + appData[item]);
+//   }
+// };
+
 appData.asking();
 start();
 appData.getExpensesMonth();
@@ -76,6 +82,13 @@ appData.getTargetMonth() >= 0
   ? console.log('Цель будет достигнута за ' + appData.getTargetMonth() + ' месяцев(-а)')
   : console.log('Цель не будет достигнута');
 
-console.log('Расходы за месяц: ', appData.expensesMonth);
-console.log('Уровень дохода: ', appData.getStatusIncome());
+console.log('Расходы за месяц: ' + appData.expensesMonth);
+console.log('Уровень дохода: ' + appData.getStatusIncome());
 console.log('Бюджет на день: ' + appData.budgetDay);
+console.log('');
+// console.log('Наша программа включает в себя данные: ' + '\n' + pullAppData);
+
+// console.log('Наша программа включает в себя данные: ');
+// for (let item in appData) {
+//   console.log(item, appData[item]);
+// }
