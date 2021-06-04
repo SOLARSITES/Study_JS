@@ -2,10 +2,6 @@
 
 let isNumber;
 let money;
-// let expenses = [];
-// let expensesAmount;
-// let accumulatedMonth;
-// let budgetDay;
 let appData = {
   budget: money, // Доход за месяц
   budgetDay: 0, // budget / 30
@@ -44,7 +40,6 @@ let appData = {
   getBudget: function () {
     appData.budgetMonth = appData.budget - appData.expensesMonth;
     appData.budgetDay = Math.floor(appData.budgetMonth / 30);
-    // return money - expensesAmount;
   },
   getTargetMonth: function () {
     return Math.ceil(appData.mission / appData.budgetMonth);
@@ -82,6 +77,5 @@ appData.getTargetMonth() >= 0
   : console.log('Цель не будет достигнута');
 
 console.log('Расходы за месяц: ', appData.expensesMonth);
-console.log(appData.addExpenses);
+console.log('Уровень дохода: ', appData.getStatusIncome());
 console.log('Бюджет на день: ' + appData.budgetDay);
-console.log(appData.getStatusIncome());
