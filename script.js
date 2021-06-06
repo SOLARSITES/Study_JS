@@ -7,7 +7,7 @@ const isNumber = function (n) {
 };
 
 const isString = function (str, comma = false) {
-  let pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
+  const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
   return pattern.test(str);
 };
 
@@ -63,7 +63,7 @@ let appData = {
 
       do {
         itemExpenses = prompt('Введите обязательную статью расходов?');
-      } while (!isString(itemExpenses) && !isNumber(itemExpenses)); // НЕ ТАК! Начинает принимать либо буквы, либо цифры!
+      } while (!isString(itemExpenses));
 
       do {
         cashExpenses = prompt('Во сколько это обойдется?', '2500');
@@ -136,7 +136,3 @@ console.log(
     .map((itemExp, i) => itemExp[0].toUpperCase() + itemExp.substring(1))
     .join(', '),
 );
-
-appData.getInfoDeposit();
-console.log(appData.calcSavedMoney(), appData.moneyDeposit, appData.percentDeposit);
-console.log(isString('Купил ВАЗ 2108'));
