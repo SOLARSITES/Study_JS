@@ -1,41 +1,28 @@
 'use strict';
 
 const buttonStart = document.getElementById('start');
-
 const buttonIncomeAdd = document.getElementsByTagName('button')[0];
-
 const buttonExpensesAdd = document.getElementsByTagName('button')[1];
-
 const inputDepositCheck = document.querySelector('#deposit-check');
-
-const inputAdditionalIncomeItem = document.querySelectorAll('.additional_income-item');
-
-const inputBudgetDayValue = document.getElementsByClassName('budget_day-value');
-
-const inputExpensesMonthValue = document.getElementsByClassName('expenses_month-value');
-
-const inputAdditionalIncomeValue = document.getElementsByClassName('additional_income-value');
-
-const inputAdditionalExpensesValue = document.getElementsByClassName('additional_expenses-value');
-
-const inputIncomePeriodValue = document.getElementsByClassName('income_period-value');
-
-const inputTargetMonthValue = document.getElementsByClassName('target_month-value');
-
+const inputBudgetDayValue = document.getElementsByClassName('budget_day-value')[0];
+const inputExpensesMonthValue = document.getElementsByClassName('expenses_month-value')[0];
+const inputAdditionalIncomeValue = document.getElementsByClassName('additional_income-value')[0];
+const inputAdditionalExpensesValue = document.getElementsByClassName(
+  'additional_expenses-value',
+)[0];
+const inputIncomePeriodValue = document.getElementsByClassName('income_period-value')[0];
+const inputTargetMonthValue = document.getElementsByClassName('target_month-value')[0];
 const inputSalaryAmount = document.querySelector('.salary-amount');
-
 const divIncomeItems = document.querySelector('.income-items');
 const inputIncomeTitle = divIncomeItems.children[0];
 const inputIncomeAmount = divIncomeItems.children[1];
-
+const inputAdditionalIncomeItem0 = document.querySelectorAll('.additional_income-item')[0];
+const inputAdditionalIncomeItem1 = document.querySelectorAll('.additional_income-item')[1];
 const divExpensesItems = document.querySelector('.expenses-items');
 const inputExpensesTitle = divExpensesItems.children[0];
 const inputExpensesAmount = divExpensesItems.children[1];
-
 const inputAdditionalExpensesItem = document.querySelector('.additional_expenses-item');
-
 const inputTargetAmount = document.querySelector('.target-amount');
-
 const inputPeriodSelect = document.querySelector('.period-select');
 
 // let money;
@@ -179,7 +166,6 @@ console.log(buttonStart);
 console.log(buttonIncomeAdd);
 console.log(buttonExpensesAdd);
 console.log(inputDepositCheck);
-console.log(inputAdditionalIncomeItem);
 console.log(inputBudgetDayValue);
 console.log(inputExpensesMonthValue);
 console.log(inputAdditionalIncomeValue);
@@ -189,6 +175,8 @@ console.log(inputTargetMonthValue);
 console.log(inputSalaryAmount);
 console.log(inputIncomeTitle);
 console.log(inputIncomeAmount);
+console.log(inputAdditionalIncomeItem0);
+console.log(inputAdditionalIncomeItem1);
 console.log(inputExpensesTitle);
 console.log(inputExpensesAmount);
 console.log(inputAdditionalExpensesItem);
