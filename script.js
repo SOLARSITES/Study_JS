@@ -66,6 +66,8 @@ let appData = {
   addExpensesBlock: function () {
     let cloneExpensesItem = divExpensesItems[0].cloneNode(true);
 
+    cloneExpensesItem.querySelector('.expenses-title').value = '';
+    cloneExpensesItem.querySelector('.expenses-amount').value = '';
     divExpensesItems[0].parentNode.insertBefore(cloneExpensesItem, buttonExpensesAdd);
     divExpensesItems = document.querySelectorAll('.expenses-items');
 
@@ -76,6 +78,8 @@ let appData = {
   addIncomeBlock: function () {
     let cloneIncomeItem = divIncomeItems[0].cloneNode(true);
 
+    cloneIncomeItem.querySelector('.income-title').value = '';
+    cloneIncomeItem.querySelector('.income-amount').value = '';
     divIncomeItems[0].parentNode.insertBefore(cloneIncomeItem, buttonIncomeAdd);
     divIncomeItems = document.querySelectorAll('.income-items');
 
@@ -179,6 +183,34 @@ let appData = {
   },
 };
 
+const allowOnlyDigits = function (event) {
+  let rawDigitsValue = event.target.value;
+
+  const getOnlyDigits = function (event) {
+    if (!/^[\d]+$/.test(event.target.value)) {
+      alert('Разрешается ввод только цифр!');
+      event.target.value = rawDigitsValue;
+      event.target.removeEventListener('change', getOnlyDigits);
+    }
+    rawDigitsValue = event.target.value;
+  };
+  event.target.addEventListener('change', getOnlyDigits);
+};
+
+const allowOnlyText = function (event) {
+  let rawTextValue = event.target.value;
+
+  const getRightText = function (event) {
+    if (!/^[,. а-яА-ЯёЁ]+$/.test(event.target.value)) {
+      alert('Разрешается ввод только русских букв, пробелов и знаков препинания!');
+      event.target.value = rawTextValue;
+      event.target.removeEventListener('change', getRightText);
+    }
+    rawTextValue = event.target.value;
+  };
+  event.target.addEventListener('change', getRightText);
+};
+
 appData.getNoStart();
 
 start.addEventListener('click', appData.start);
@@ -186,3 +218,10 @@ buttonExpensesAdd.addEventListener('click', appData.addExpensesBlock);
 buttonIncomeAdd.addEventListener('click', appData.addIncomeBlock);
 inputPeriodSelect.addEventListener('input', appData.showPeriodAmount);
 inputSalaryAmount.addEventListener('input', appData.getNoStart);
+
+document.querySelectorAll('[placeholder="Наименование"]').forEach(function (input) {
+  input.addEventListener('focus', allowOnlyText);
+});
+document.querySelectorAll('[placeholder="Сумма"]').forEach(function (input) {
+  input.addEventListener('focus', allowOnlyDigits);
+});
