@@ -190,11 +190,11 @@ const allowOnlyDigits = function (event) {
     if (!/^[\d]+$/.test(event.target.value)) {
       alert('Разрешается ввод только цифр!');
       event.target.value = rawDigitsValue;
-      event.target.removeEventListener('change', getOnlyDigits);
+      event.target.removeEventListener('input', getOnlyDigits);
     }
     rawDigitsValue = event.target.value;
   };
-  event.target.addEventListener('change', getOnlyDigits);
+  event.target.addEventListener('input', getOnlyDigits);
 };
 
 const allowOnlyText = function (event) {
@@ -204,11 +204,11 @@ const allowOnlyText = function (event) {
     if (!/^[,. а-яА-ЯёЁ]+$/.test(event.target.value)) {
       alert('Разрешается ввод только русских букв, пробелов и знаков препинания!');
       event.target.value = rawTextValue;
-      event.target.removeEventListener('change', getRightText);
+      event.target.removeEventListener('input', getRightText);
     }
     rawTextValue = event.target.value;
   };
-  event.target.addEventListener('change', getRightText);
+  event.target.addEventListener('input', getRightText);
 };
 
 appData.getNoStart();
