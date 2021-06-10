@@ -50,6 +50,39 @@ let appData = {
     this.getAddIncome();
     this.getBudget();
     this.showResult();
+
+    if (start.textContent === 'Рассчитать') {
+      this.blockInputs();
+      start.textContent = 'Сбросить';
+    } else {
+      start.textContent = 'Рассчитать';
+      this.reset();
+    }
+  },
+  blockInputs: function (disabled = true) {
+    document.querySelectorAll('.data input[type=text]').forEach(function (item) {
+      item.disabled = disabled;
+    });
+  },
+  reset: function () {
+    for (let i = divIncomeItems.length - 1; i > 0; i--) {
+      divIncomeItems[0].parentNode.removeChild(divIncomeItems[i]);
+    }
+
+    for (let i = divExpensesItems.length - 1; i > 0; i--) {
+      divExpensesItems[0].parentNode.removeChild(divExpensesItems[i]);
+    }
+
+    buttonIncomeAdd.style.display = '';
+    buttonExpensesAdd.style.display = '';
+
+    this.blockInputs(false);
+    document.querySelectorAll('input[type=text]').forEach(function (item) {
+      item.value = '';
+    });
+    this.getBudget();
+    inputPeriodSelect.value = document.querySelector('.period-amount').textContent = '1';
+    this.blockStart();
   },
   showResult: function () {
     inputBudgetMonthValue.value = this.budgetMonth;
