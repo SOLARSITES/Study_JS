@@ -1,0 +1,27 @@
+button:active,
+button:hover,
+button:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
+.div {
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.button {
+  color: #ffffff;
+  background-color: limegreen;
+  font-weight: 700;
+  font-size: 17px;
+  min-width: 160px;
+  min-height: 50px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
