@@ -242,7 +242,7 @@ AppData.prototype.calcPeriod = function () {
   return this.budgetMonth * periodSelect.value;
 };
 
-AppData.prototype.changePeriodSelect = function () {
+AppData.prototype.changePeriodSelect = function (event) {
   document.querySelector('.period-amount').textContent = event.target.value;
   incomePeriodValue.value = this.calcPeriod();
 };
@@ -251,13 +251,13 @@ AppData.prototype.blockStart = function () {
   start.disabled = !salaryAmount.value.trim();
 };
 
-AppData.prototype.check = function () {
+AppData.prototype.check = function (event) {
   let tmpValue = event.target.value.trim();
   let target = event.target;
 
-  const changeInputNumber = (event) => {
-    let condition = /.+/,
-      textAlert;
+  const changeInputNumber = function (event) {
+    let condition = /.+/;
+    let textAlert;
 
     if (target.placeholder === 'Наименование') {
       condition = /^[,. а-яА-ЯёЁ]+$/;
