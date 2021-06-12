@@ -46,8 +46,6 @@ const AppData = function () {
   this.moneyDeposit = 0;
 };
 
-const appData = new AppData();
-
 AppData.prototype.start = function () {
   if (start.textContent === 'Рассчитать') {
     this.getExpenses();
@@ -291,5 +289,7 @@ AppData.prototype.eventsListeners = function () {
     input.addEventListener('focus', this.check);
   });
 };
+
+const appData = new AppData();
 
 appData.eventsListeners();
