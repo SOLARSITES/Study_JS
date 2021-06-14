@@ -22,29 +22,31 @@ const start = document.getElementById('start'),
 let expensesItems = document.querySelectorAll('.expenses-items'), // Возможные расходы
   incomeItems = document.querySelectorAll('.income-items'); // Дополнительный доход
 
-const isNumber = function (n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
+// const isNumber = function (n) {
+//   return !isNaN(parseFloat(n)) && isFinite(n);
+// };
+//
+// const isString = function (str, comma = false) {
+//   const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
+//   return pattern.test(str);
+// };
 
-const isString = function (str, comma = false) {
-  const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
-  return pattern.test(str);
-};
-
-const AppData = function () {
-  this.budget = 0; // Доход за месяц
-  this.budgetDay = 0; // budget / 30
-  this.budgetMonth = 0;
-  this.income = {}; // Дополнительные доходы
-  this.incomeMonth = 0;
-  this.addIncome = [];
-  this.expenses = {}; // Обазятельные статьи расходов
-  this.expensesMonth = 0;
-  this.addExpenses = []; // Дополнительные расходы
-  this.deposit = false;
-  this.percentDeposit = 0;
-  this.moneyDeposit = 0;
-};
+class AppData {
+  constructor() {
+    this.budget = 0; // Доход за месяц
+    this.budgetDay = 0; // budget / 30
+    this.budgetMonth = 0;
+    this.income = {}; // Дополнительные доходы
+    this.incomeMonth = 0;
+    this.addIncome = [];
+    this.expenses = {}; // Обазятельные статьи расходов
+    this.expensesMonth = 0;
+    this.addExpenses = []; // Дополнительные расходы
+    this.deposit = false;
+    this.percentDeposit = 0;
+    this.moneyDeposit = 0;
+  }
+}
 
 AppData.prototype.start = function () {
   if (start.textContent === 'Рассчитать') {
@@ -253,7 +255,7 @@ AppData.prototype.check = function (event) {
   let tmpValue = event.target.value.trim();
   let target = event.target;
 
-  const changeInputNumber = function (event) {
+  const changeInputNumber = (event) => {
     let condition = /.+/;
     let textAlert;
 
@@ -274,7 +276,7 @@ AppData.prototype.check = function (event) {
     }
     tmpValue = event.target.value.trim();
   };
-  event.target.addEventListener('input', changeInputNumber);
+  target.addEventListener('input', changeInputNumber);
 };
 
 AppData.prototype.eventsListeners = function () {
