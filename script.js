@@ -22,6 +22,18 @@ const start = document.getElementById('start'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'), // Возможные расходы
   targetAmount = document.querySelector('.target-amount'); // Цель
 
+let appDataStorage = localStorage.getItem('appDataStorage')
+  ? JSON.parse(localStorage.getItem('appDataStorage'))
+  : {
+      budgetDayValue: '',
+      budgetMonthValue: '',
+      expensesMonthValue: '',
+      additionalIncomeValue: '',
+      additionalExpensesValue: '',
+      incomePeriodValue: '',
+      targetMonthValue: '',
+    };
+
 class AppData {
   constructor() {
     this.budget = 0; // Доход за месяц
@@ -294,6 +306,27 @@ class AppData {
     depositAmount.addEventListener('focus', this.check);
     depositPercent.addEventListener('focus', this.check);
     depositCheck.addEventListener('change', this.depositHandler.bind(this));
+  }
+
+  addToStorage() {
+    localStorage.setItem('appDataStorage', JSON.stringify(appDataStorage));
+  }
+
+  setCookie(key, value, year, month, day, path, domain, secure) {
+    let cookieStr = encodeURI(key) + '=' + encodeURI(value);
+    if (year) {
+      const expires = new Date(year, month - 1, day);
+      cookieStr += '; expires=' + expires.toGMTString();
+    } else {
+      const expires = new Date();
+      expires.setMonth(expires.getMonth() + 1);
+      cookieStr += '; expires=' + expires.toGMTString();
+    }
+    cookieStr += path ? '; path=' + encodeURI(path) : '';
+    cookieStr += domain ? '; domain=' + encodeURI(domain) : '';
+    cookieStr += secure ? '; secure' : '';
+
+    document.cookie = cookieStr;
   }
 }
 
