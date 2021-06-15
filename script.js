@@ -103,7 +103,7 @@ class AppData {
 
     this.budget = +salaryAmount.value;
     this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + monthDeposit;
-    this.budgetDay = this.budgetMonth / 30;
+    this.budgetDay = Math.floor(this.budgetMonth / 30);
   }
 
   getInfoDeposit() {
