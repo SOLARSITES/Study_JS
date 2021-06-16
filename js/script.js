@@ -88,7 +88,11 @@ const countTimer = (deadline) => {
     timerSeconds.textContent = addZero(timer.seconds);
 
     if (timer.timeRemaining < 0) {
+      const dateStop = new Date(deadline);
+
       clearInterval(idInterval);
+      dateStop.setDate(dateStop.getDate() + 1);
+      countTimer(dateStop);
     }
   };
 
