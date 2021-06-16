@@ -14,10 +14,9 @@ window.addEventListener('DOMContentLoaded', () => {
         hours = Math.floor(timeRemaining / 60 / 60) % 24;
       // day = Math.floor(timeRemaining / 60 / 60 / 24);
       return {
-        timeRemaining,
-        hours,
-        minutes,
-        seconds,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds,
       };
     }
 
