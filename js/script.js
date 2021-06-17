@@ -106,7 +106,7 @@ const togglePopUp = () => {
     popupContent = document.querySelector('.popup-content'),
     popupData = {
       count: -445,
-      speed: 10,
+      speed: 20,
       startPos: -445,
       endPos: 0,
     };
