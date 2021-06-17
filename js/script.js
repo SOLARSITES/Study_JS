@@ -126,6 +126,8 @@ const togglePopUp = () => {
     }
   };
 
+  popupContent.style.left = `calc(50% - 20rem)`;
+
   popupBtn.forEach((elem) => {
     elem.addEventListener('click', () => {
       popup.style.display = 'block';
