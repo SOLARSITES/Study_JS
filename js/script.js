@@ -95,10 +95,9 @@ const countTimer = (deadline) => {
       countTimer(dateStop);
     }
   };
+  updateClock();
 
   idInterval = setInterval(updateClock, 1000);
-
-  setTimeout(updateClock, 0);
 };
 
 countTimer('17 Jun 2021');
