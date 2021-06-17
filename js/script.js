@@ -58,6 +58,36 @@ const countTimer = (deadline) => {
 
 countTimer('17 Jun 2021');
 
+const animateScroll = () => {
+  const target = event.target.closest('[href^="#"]'),
+    speed = 0.5;
+
+  if (target) {
+    const pageY = window.pageYOffset,
+      hash = target.href.replace(/[^#]*(.*)/, '$1'),
+      distTopPosition = document.querySelector(hash).getBoundingClientRect().top;
+
+    let start = 0;
+
+    const step = (time) => {
+      if (!start) start = time;
+
+      const progress = time - start;
+
+      const r =
+        distTopPosition < 0
+          ? Math.max(pageY - progress / speed, pageY + distTopPosition)
+          : Math.min(pageY + progress / speed, pageY + distTopPosition);
+
+      window.scrollTo(0, r);
+
+      if (r < pageY + distTopPosition) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  }
+};
+
 // Menu
 const toggleMenu = () => {
   const btnMenu = document.querySelector('.menu'),
@@ -67,6 +97,7 @@ const toggleMenu = () => {
 
   const handlerMenu = () => {
     menu.classList.toggle('active-menu');
+    animateScroll();
 
     // if (!menu.style.transform || menu.style.transform === `translate(-100%)`) {
     //   menu.style.transform = `translate(0)`;
@@ -145,3 +176,5 @@ const togglePopUp = () => {
 };
 
 togglePopUp();
+
+document.querySelector('main>a').addEventListener('click', animateScroll);
