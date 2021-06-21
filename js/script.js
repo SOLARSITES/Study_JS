@@ -90,22 +90,20 @@ const animateScroll = () => {
 
 // Menu
 const toggleMenu = () => {
-  const btnMenu = document.querySelector('.menu'),
-    // closeBtn = document.querySelector('.close-btn'),
-    // menuItems = menu.querySelectorAll('ul>li'),
-    menu = document.querySelector('menu');
-
   const handlerMenu = () => {
     const target = event.target;
 
-    // console.log(target);
+    const displayMenu = () => {
+      document.querySelector('menu').classList.toggle('active-menu');
+    };
 
-    if (target.closest('.menu')) {
-      menu.classList.toggle('active-menu');
-    } else if (target !== menu && target.closest('[href^="#"]')) {
-      // console.log(target.closest('[href^="#"]'));
-
-      menu.classList.toggle('active-menu');
+    if (
+      target.closest('.menu') ||
+      (!target.closest('menu') && document.querySelector('menu').classList.contains('active-menu'))
+    ) {
+      displayMenu();
+    } else if (target.closest('menu') && target.closest('[href^="#"]')) {
+      displayMenu();
 
       if (!target.classList.contains('close-btn')) {
         animateScroll();
@@ -113,10 +111,7 @@ const toggleMenu = () => {
     }
   };
 
-  btnMenu.addEventListener('click', handlerMenu);
-  // closeBtn.addEventListener('click', handlerMenu);
-  // menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
-  menu.addEventListener('click', handlerMenu);
+  document.body.addEventListener('click', handlerMenu);
 };
 
 toggleMenu();
