@@ -114,26 +114,10 @@ const toggleMenu = () => {
 toggleMenu();
 
 // Popup
-// const togglePopUp = () => {
-//   const popup = document.querySelector('.popup'),
-//     popupBtn = document.querySelectorAll('.popup-btn'),
-//     popupClose = document.querySelector('.popup-close');
-//
-//   popupBtn.forEach((elem) => {
-//     elem.addEventListener('click', () => {
-//       popup.style.display = 'block';
-//     });
-//   });
-//
-//   popupClose.addEventListener('click', () => {
-//     popup.style.display = 'none';
-//   });
-// };
-
 const togglePopUp = () => {
   const popup = document.querySelector('.popup'),
     popupBtn = document.querySelectorAll('.popup-btn'),
-    popupClose = document.querySelector('.popup-close'),
+    // popupClose = document.querySelector('.popup-close'),
     popupContent = document.querySelector('.popup-content'),
     popupData = {
       count: -445,
@@ -170,11 +154,74 @@ const togglePopUp = () => {
     });
   });
 
-  popupClose.addEventListener('click', () => {
-    popup.style.display = 'none';
+  // popupClose.addEventListener('click', () => {
+  //   popup.style.display = 'none';
+  // });
+
+  popup.addEventListener('click', (event) => {
+    let target = event.target;
+
+    if (target.classList.contains('popup-close')) {
+      popup.style.display = 'none';
+    } else {
+      target = target.closest('.popup-content');
+
+      if (!target) {
+        popup.style.display = 'none';
+      }
+    }
   });
 };
 
 togglePopUp();
 
 document.querySelector('main>a').addEventListener('click', animateScroll);
+
+// Tabs
+const tabs = () => {
+  const tabHeader = document.querySelector('.service-header'),
+    tab = tabHeader.querySelectorAll('.service-header-tab'),
+    tabContent = document.querySelectorAll('.service-tab');
+
+  const toggleTabContent = (index) => {
+    for (let i = 0; i < tabContent.length; i++) {
+      if (index === i) {
+        tab[i].classList.add('active');
+        tabContent[i].classList.remove('d-none');
+      } else {
+        tab[i].classList.remove('active');
+        tabContent[i].classList.add('d-none');
+      }
+    }
+  };
+
+  tabHeader.addEventListener('click', (event) => {
+    let target = event.target;
+
+    // while (target !== tabHeader) {
+    //   console.log(target);
+    //
+    //   if (target.classList.contains('service-header-tab')) {
+    //     tab.forEach((item, i) => {
+    //       if (item === target) {
+    //         toggleTabContent(i);
+    //       }
+    //     });
+    //     return;
+    //   }
+    //   target = target.parentNode;
+    // }
+
+    target = target.closest('.service-header-tab');
+
+    if (target) {
+      tab.forEach((item, i) => {
+        if (item === target) {
+          toggleTabContent(i);
+        }
+      });
+    }
+  });
+};
+
+tabs();
