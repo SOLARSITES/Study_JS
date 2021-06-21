@@ -111,12 +111,6 @@ const toggleMenu = () => {
         animateScroll();
       }
     }
-
-    // if (!menu.style.transform || menu.style.transform === `translate(-100%)`) {
-    //   menu.style.transform = `translate(0)`;
-    // } else {
-    //   menu.style.transform = `translate(-100%)`;
-    // }
   };
 
   btnMenu.addEventListener('click', handlerMenu);
@@ -131,7 +125,6 @@ toggleMenu();
 const togglePopUp = () => {
   const popup = document.querySelector('.popup'),
     popupBtn = document.querySelectorAll('.popup-btn'),
-    // popupClose = document.querySelector('.popup-close'),
     popupContent = document.querySelector('.popup-content'),
     popupData = {
       count: -445,
@@ -167,10 +160,6 @@ const togglePopUp = () => {
       }
     });
   });
-
-  // popupClose.addEventListener('click', () => {
-  //   popup.style.display = 'none';
-  // });
 
   popup.addEventListener('click', (event) => {
     let target = event.target;
@@ -211,20 +200,6 @@ const tabs = () => {
 
   tabHeader.addEventListener('click', (event) => {
     let target = event.target;
-
-    // while (target !== tabHeader) {
-    //   console.log(target);
-    //
-    //   if (target.classList.contains('service-header-tab')) {
-    //     tab.forEach((item, i) => {
-    //       if (item === target) {
-    //         toggleTabContent(i);
-    //       }
-    //     });
-    //     return;
-    //   }
-    //   target = target.parentNode;
-    // }
 
     target = target.closest('.service-header-tab');
 
