@@ -224,13 +224,7 @@ const slider = () => {
     prevSlide(slide, currentSlide, 'portfolio-item-active');
     prevSlide(dot, currentSlide, 'dot-active');
 
-    // currentSlide++;
-
     currentSlide = currentSlide < slide.length - 1 ? currentSlide + 1 : 0;
-
-    // if (currentSlide >= slide.length) {
-    //   currentSlide = 0;
-    // }
 
     nextSlide(slide, currentSlide, 'portfolio-item-active');
     nextSlide(dot, currentSlide, 'dot-active');
