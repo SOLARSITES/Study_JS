@@ -56,8 +56,6 @@ const countTimer = (deadline) => {
   idInterval = setInterval(updateClock, 1000);
 };
 
-countTimer('17 Jun 2021');
-
 const animateScroll = () => {
   const target = event.target.closest('[href^="#"]'),
     speed = 0.5;
@@ -114,8 +112,6 @@ const toggleMenu = () => {
   document.body.addEventListener('click', handlerMenu);
 };
 
-toggleMenu();
-
 // Popup
 const togglePopUp = () => {
   const popup = document.querySelector('.popup'),
@@ -171,8 +167,6 @@ const togglePopUp = () => {
   });
 };
 
-togglePopUp();
-
 document.querySelector('main>a').addEventListener('click', animateScroll);
 
 // Tabs
@@ -208,12 +202,10 @@ const tabs = () => {
   });
 };
 
-tabs();
-
 // Slider
 const slider = () => {
   const slide = document.querySelectorAll('.portfolio-item'),
-    btn = document.querySelectorAll('.portfolio-btn'),
+    // btn = document.querySelectorAll('.portfolio-btn'),
     dot = document.querySelectorAll('.dot'),
     slider = document.querySelector('.portfolio-content');
 
@@ -231,16 +223,20 @@ const slider = () => {
   const autoPlaySlide = () => {
     prevSlide(slide, currentSlide, 'portfolio-item-active');
     prevSlide(dot, currentSlide, 'dot-active');
-    currentSlide++;
 
-    if (currentSlide >= slide.length) {
-      currentSlide = 0;
-    }
+    // currentSlide++;
+
+    currentSlide = currentSlide < slide.length - 1 ? currentSlide + 1 : 0;
+
+    // if (currentSlide >= slide.length) {
+    //   currentSlide = 0;
+    // }
+
     nextSlide(slide, currentSlide, 'portfolio-item-active');
     nextSlide(dot, currentSlide, 'dot-active');
   };
 
-  const startSlide = (time = 3000) => {
+  const startSlide = (time = 2000) => {
     interval = setInterval(autoPlaySlide, time);
   };
 
@@ -251,37 +247,35 @@ const slider = () => {
   slider.addEventListener('click', (event) => {
     event.preventDefault();
 
-    let target = event.target;
+    const target = event.target;
 
-    if (!target.matches('.portfolio-btn, .dot')) {
-      return;
+    if (target.matches('.portfolio-btn, .dot')) {
+      prevSlide(slide, currentSlide, 'portfolio-item-active');
+      prevSlide(dot, currentSlide, 'dot-active');
+
+      if (target.matches('#arrow-right')) {
+        currentSlide++;
+      } else if (target.matches('#arrow-left')) {
+        currentSlide--;
+      } else if (target.matches('.dot')) {
+        dot.forEach((elem, index) => {
+          if (elem === target) {
+            currentSlide = index;
+          }
+        });
+      }
+
+      if (currentSlide >= slide.length) {
+        currentSlide = 0;
+      }
+
+      if (currentSlide < 0) {
+        currentSlide = slide.length - 1;
+      }
+
+      nextSlide(slide, currentSlide, 'portfolio-item-active');
+      nextSlide(dot, currentSlide, 'dot-active');
     }
-
-    prevSlide(slide, currentSlide, 'portfolio-item-active');
-    prevSlide(dot, currentSlide, 'dot-active');
-
-    if (target.matches('#arrow-right')) {
-      currentSlide++;
-    } else if (target.matches('#arrow-left')) {
-      currentSlide--;
-    } else if (target.matches('.dot')) {
-      dot.forEach((elem, index) => {
-        if (elem === target) {
-          currentSlide = index;
-        }
-      });
-    }
-
-    if (currentSlide >= slide.length) {
-      currentSlide = 0;
-    }
-
-    if (currentSlide < 0) {
-      currentSlide = slide.length - 1;
-    }
-
-    nextSlide(slide, currentSlide, 'portfolio-item-active');
-    nextSlide(dot, currentSlide, 'dot-active');
   });
 
   slider.addEventListener('mouseover', (event) => {
@@ -299,4 +293,24 @@ const slider = () => {
   startSlide();
 };
 
+// Add .dot
+const addDot = () => {
+  const portfolioItem = document.querySelectorAll('.portfolio-item'),
+    portfolioDots = document.querySelector('.portfolio-dots');
+
+  portfolioItem.forEach(() => {
+    const dot = document.createElement('li');
+
+    dot.classList.add('dot');
+    portfolioDots.appendChild(dot);
+  });
+
+  portfolioDots.children[0].classList.add('dot-active');
+};
+
+countTimer('17 Jun 2021');
+toggleMenu();
+togglePopUp();
+tabs();
+addDot();
 slider();
