@@ -321,10 +321,87 @@ const setCommandImg = () => {
   command.addEventListener('mouseout', changingPhotos);
 };
 
+// Validate All
+const validateAll = () => {
+  const checkValidName = (elem) => (elem.value = elem.value.replace(/[^а-яё ]/gi, ''));
+
+  const checkValidMessage = (elem) =>
+    (elem.value = elem.value.replace(/[^а-яё ,.!?():;+-\d]/gi, ''));
+
+  const checkValidNumber = (elem) => (elem.value = elem.value.replace(/[^\d]/g, ''));
+
+  const checkValidPhone = (event) => {
+    const keyCode = event.keyCode;
+    const target = event.target;
+
+    const template = '+7 (___) ___-__-__',
+      def = template.replace(/\D/g, ''),
+      val = target.value.replace(/\D/g, '');
+    let i = 0,
+      newValue = template.replace(/[_\d]/g, (a) =>
+        i < val.length ? val.charAt(i++) || def.charAt(i) : a,
+      );
+
+    i = newValue.indexOf('_');
+
+    if (i != -1) {
+      newValue = newValue.slice(0, i);
+    }
+
+    let reg = template
+      .substr(0, target.value.length)
+      .replace(/_+/g, (a) => {
+        return '\\d{1,' + a.length + '}';
+      })
+      .replace(/[+()]/g, '\\$&');
+
+    reg = new RegExp('^' + reg + '$');
+
+    if (!reg.test(target.value) || target.value.length < 5 || (keyCode > 47 && keyCode < 58)) {
+      target.value = newValue;
+    }
+    if (event.type == 'blur' && target.value.length < 5) {
+      target.value = '';
+    }
+  };
+
+  const validation = () => {
+    const calcItem = document.querySelectorAll('.calc-item');
+    const form2Phone = document.getElementById('form2-phone');
+    const inputs = document.querySelectorAll('.phone-user');
+
+    document.body.addEventListener('input', (event) => {
+      const target = event.target;
+
+      if (target.name === 'user_name') {
+        checkValidName(target);
+      } else if (target.name === 'user_quest') {
+        checkValidMessage(target);
+      } else if (target.name === 'calc-item' || target.id === 'form2-phone') {
+        checkValidNumber(target);
+      }
+    });
+
+    inputs.forEach((item) => {
+      item.addEventListener('input', checkValidPhone);
+      item.addEventListener('focus', checkValidPhone);
+      item.addEventListener('blur', checkValidPhone);
+    });
+
+    calcItem.forEach((item) => {
+      item.addEventListener('input', checkValidPhone);
+      item.addEventListener('focus', checkValidPhone);
+      item.addEventListener('blur', checkValidPhone);
+    });
+  };
+  validation();
+};
+
 countTimer('17 Jun 2021');
 toggleMenu();
 togglePopUp();
 tabs();
 addDot();
 setCommandImg();
+validateAll();
 slider();
