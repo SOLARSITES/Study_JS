@@ -322,79 +322,77 @@ const setCommandImg = () => {
 };
 
 // Validate All
-const validateAll = () => {
-  const checkValidName = (elem) => (elem.value = elem.value.replace(/[^а-яё ]/gi, ''));
+// инпут с калькулятором, могут быть только цифры
+// получить все инпуты из калькулятора и на каждый из них навешиваем обработчик события
+// когда возникает событие blur мы производим валидацию
+// во время валидации нужно получить текущее значение инпута, удалить в нем ненужные символы и новое значение записать обратно в инпут
 
-  const checkValidMessage = (elem) =>
-    (elem.value = elem.value.replace(/[^а-яё ,.!?():;+-\d]/gi, ''));
+const createValidation = () => {
+  const calcItems = document.querySelectorAll('input.calc-item');
+  const form2Name = document.getElementById('form2-name');
+  const form2Email = document.getElementById('form2-email');
+  const form2Phone = document.getElementById('form2-phone');
+  const form2Message = document.getElementById('form2-message');
 
-  const checkValidNumber = (elem) => (elem.value = elem.value.replace(/[^\d]/g, ''));
-
-  const checkValidPhone = (event) => {
-    const keyCode = event.keyCode;
+  const validateCalcItem = (event) => {
     const target = event.target;
+    let targetValue = target.value;
 
-    const template = '+7 (___) ___-__-__',
-      def = template.replace(/\D/g, ''),
-      val = target.value.replace(/\D/g, '');
-    let i = 0,
-      newValue = template.replace(/[_\d]/g, (a) =>
-        i < val.length ? val.charAt(i++) || def.charAt(i) : a,
-      );
+    targetValue = targetValue.replace(/\D/g, '');
+    target.value = targetValue;
 
-    i = newValue.indexOf('_');
-
-    if (i != -1) {
-      newValue = newValue.slice(0, i);
-    }
-
-    let reg = template
-      .substr(0, target.value.length)
-      .replace(/_+/g, (a) => {
-        return '\\d{1,' + a.length + '}';
-      })
-      .replace(/[+()]/g, '\\$&');
-
-    reg = new RegExp('^' + reg + '$');
-
-    if (!reg.test(target.value) || target.value.length < 5 || (keyCode > 47 && keyCode < 58)) {
-      target.value = newValue;
-    }
-    if (event.type == 'blur' && target.value.length < 5) {
-      target.value = '';
-    }
+    console.log('calc');
   };
 
-  const validation = () => {
-    const calcItem = document.querySelectorAll('.calc-item');
-    const form2Phone = document.getElementById('form2-phone');
-    const inputs = document.querySelectorAll('.phone-user');
+  const validateFormName = (event) => {
+    const target = event.target;
+    let targetValue = target.value;
 
-    document.body.addEventListener('input', (event) => {
-      const target = event.target;
+    targetValue = targetValue.replace(/[^а-яё -]/gi, '');
+    target.value = targetValue;
 
-      if (target.name === 'user_name') {
-        checkValidName(target);
-      } else if (target.name === 'user_quest') {
-        checkValidMessage(target);
-      } else if (target.name === 'calc-item' || target.id === 'form2-phone') {
-        checkValidNumber(target);
-      }
-    });
-
-    inputs.forEach((item) => {
-      item.addEventListener('input', checkValidPhone);
-      item.addEventListener('focus', checkValidPhone);
-      item.addEventListener('blur', checkValidPhone);
-    });
-
-    calcItem.forEach((item) => {
-      item.addEventListener('input', checkValidPhone);
-      item.addEventListener('focus', checkValidPhone);
-      item.addEventListener('blur', checkValidPhone);
-    });
+    console.log('name');
   };
-  validation();
+
+  const validateFormEmail = (event) => {
+    const target = event.target;
+    let targetValue = target.value;
+
+    targetValue = targetValue.replace(/[^a-z@\-_.!~*']/gi, '');
+    target.value = targetValue;
+
+    console.log('email');
+  };
+
+  const validateFormPhone = (event) => {
+    const target = event.target;
+    let targetValue = target.value;
+
+    targetValue = targetValue.replace(/[^()\-0-9]/g, '');
+    target.value = targetValue;
+
+    console.log('phone');
+  };
+
+  const validateFormMessage = (event) => {
+    const target = event.target;
+    let targetValue = target.value;
+
+    targetValue = targetValue.replace(/[^а-яё -]/gi, '');
+    target.value = targetValue;
+
+    console.log('message');
+  };
+
+  calcItems.forEach((calcItem) => {
+    calcItem.addEventListener('blur', validateCalcItem);
+  });
+  form2Name.addEventListener('blur', validateFormName);
+  form2Email.addEventListener('blur', validateFormEmail);
+  form2Phone.addEventListener('blur', validateFormPhone);
+  form2Message.addEventListener('blur', validateFormMessage);
+
+  console.log(calcItems);
 };
 
 countTimer('17 Jun 2021');
@@ -403,5 +401,5 @@ togglePopUp();
 tabs();
 addDot();
 setCommandImg();
-validateAll();
+createValidation();
 slider();
