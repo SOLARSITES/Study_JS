@@ -321,12 +321,7 @@ const setCommandImg = () => {
   command.addEventListener('mouseout', changingPhotos);
 };
 
-// Validate All
-// инпут с калькулятором, могут быть только цифры
-// получить все инпуты из калькулятора и на каждый из них навешиваем обработчик события
-// когда возникает событие blur мы производим валидацию
-// во время валидации нужно получить текущее значение инпута, удалить в нем ненужные символы и новое значение записать обратно в инпут
-
+// Create Validation
 const createValidation = () => {
   const calcItems = document.querySelectorAll('input.calc-item');
   const form2Name = document.getElementById('form2-name');
@@ -334,54 +329,45 @@ const createValidation = () => {
   const form2Phone = document.getElementById('form2-phone');
   const form2Message = document.getElementById('form2-message');
 
-  const validateCalcItem = (event) => {
-    const target = event.target;
-    let targetValue = target.value;
-
-    targetValue = targetValue.replace(/\D/g, '');
-    target.value = targetValue;
-
-    console.log('calc');
+  const validateCalcItem = (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '');
   };
 
-  const validateFormName = (event) => {
-    const target = event.target;
-    let targetValue = target.value;
-
-    targetValue = targetValue.replace(/[^а-яё -]/gi, '');
-    target.value = targetValue;
-
-    console.log('name');
+  const validateFormName = (e) => {
+    e.target.value = e.target.value
+      .replace(/[^а-яё -]/gi, '')
+      .replace(/^[ -]+/g, '')
+      .replace(/[ -]+$/g, '')
+      .replace(/\s+/g, ' ')
+      .split(' ')
+      .map((word) => {
+        return word[0].toUpperCase() + word.slice(1);
+      })
+      .join(' ');
   };
 
-  const validateFormEmail = (event) => {
-    const target = event.target;
-    let targetValue = target.value;
-
-    targetValue = targetValue.replace(/[^a-z@\-_.!~*']/gi, '');
-    target.value = targetValue;
-
-    console.log('email');
+  const validateFormEmail = (e) => {
+    e.target.value = e.target.value
+      .replace(/[^a-z@\-_.!~*']/gi, '')
+      .replace(/^[ -]+/g, '')
+      .replace(/[ -]+$/g, '')
+      .replace(/\s+/g, ' ');
   };
 
-  const validateFormPhone = (event) => {
-    const target = event.target;
-    let targetValue = target.value;
-
-    targetValue = targetValue.replace(/[^()\-0-9]/g, '');
-    target.value = targetValue;
-
-    console.log('phone');
+  const validateFormPhone = (e) => {
+    e.target.value = e.target.value
+      .replace(/[^()\-0-9]/g, '')
+      .replace(/^[ -]+/g, '')
+      .replace(/[ -]+$/g, '')
+      .replace(/\s+/g, ' ');
   };
 
-  const validateFormMessage = (event) => {
-    const target = event.target;
-    let targetValue = target.value;
-
-    targetValue = targetValue.replace(/[^а-яё -]/gi, '');
-    target.value = targetValue;
-
-    console.log('message');
+  const validateFormMessage = (e) => {
+    e.target.value = e.target.value
+      .replace(/[^а-яё -]/gi, '')
+      .replace(/^[ -]+/g, '')
+      .replace(/[ -]+$/g, '')
+      .replace(/\s+/g, ' ');
   };
 
   calcItems.forEach((calcItem) => {
@@ -391,8 +377,6 @@ const createValidation = () => {
   form2Email.addEventListener('blur', validateFormEmail);
   form2Phone.addEventListener('blur', validateFormPhone);
   form2Message.addEventListener('blur', validateFormMessage);
-
-  console.log(calcItems);
 };
 
 countTimer('17 Jun 2021');
