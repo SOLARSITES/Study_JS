@@ -341,6 +341,9 @@ const createValidation = () => {
       .replace(/\s+/g, ' ')
       .split(' ')
       .map((word) => {
+        if (word === '') {
+          return word;
+        }
         return word[0].toUpperCase() + word.slice(1);
       })
       .join(' ');
@@ -397,6 +400,7 @@ const calc = () => {
     //   target.matches('.calc-count') ||
     //   target.matches('.calc-day')
     // ) {
+    // console.log(1);
     // }
 
     // if (
@@ -405,6 +409,7 @@ const calc = () => {
     //   target === calcCount ||
     //   target === calcDay
     // ) {
+    // console.log(1);
     // }
 
     if (target.matches('select') || target.matches('input')) {
