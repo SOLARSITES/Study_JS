@@ -324,9 +324,15 @@ const setCommandImg = () => {
 // Create Validation
 const createValidation = () => {
   const calcItems = document.querySelectorAll('input.calc-item');
+  const form1Name = document.getElementById('form1-name');
   const form2Name = document.getElementById('form2-name');
+  const form3Name = document.getElementById('form3-name');
+  const form1Email = document.getElementById('form1-email');
   const form2Email = document.getElementById('form2-email');
+  const form3Email = document.getElementById('form3-email');
+  const form1Phone = document.getElementById('form1-phone');
   const form2Phone = document.getElementById('form2-phone');
+  const form3Phone = document.getElementById('form3-phone');
   const form2Message = document.getElementById('form2-message');
 
   const validateCalcItem = (e) => {
@@ -376,9 +382,15 @@ const createValidation = () => {
   calcItems.forEach((calcItem) => {
     calcItem.addEventListener('blur', validateCalcItem);
   });
+  form1Name.addEventListener('blur', validateFormName);
   form2Name.addEventListener('blur', validateFormName);
+  form3Name.addEventListener('blur', validateFormName);
+  form1Email.addEventListener('blur', validateFormEmail);
   form2Email.addEventListener('blur', validateFormEmail);
+  form3Email.addEventListener('blur', validateFormEmail);
+  form1Phone.addEventListener('blur', validateFormPhone);
   form2Phone.addEventListener('blur', validateFormPhone);
+  form3Phone.addEventListener('blur', validateFormPhone);
   form2Message.addEventListener('blur', validateFormMessage);
 };
 
