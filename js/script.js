@@ -379,6 +379,40 @@ const createValidation = () => {
   form2Message.addEventListener('blur', validateFormMessage);
 };
 
+// Calculator
+const calc = () => {
+  const calcBlock = document.querySelector('.calc-block'),
+    calcType = document.querySelector('.calc-type'),
+    calcSquare = document.querySelector('.calc-square'),
+    calcCount = document.querySelector('.calc-count'),
+    calcDay = document.querySelector('.calc-day'),
+    totalValue = document.getElementById('total');
+
+  calcBlock.addEventListener('change', (event) => {
+    const target = event.target;
+
+    // if (
+    //   target.matches('.calc-type') ||
+    //   target.matches('.calc-square') ||
+    //   target.matches('.calc-count') ||
+    //   target.matches('.calc-day')
+    // ) {
+    // }
+
+    // if (
+    //   target === calcType ||
+    //   target === calcSquare ||
+    //   target === calcCount ||
+    //   target === calcDay
+    // ) {
+    // }
+
+    if (target.matches('select') || target.matches('input')) {
+      console.log(1);
+    }
+  });
+};
+
 countTimer('17 Jun 2021');
 toggleMenu();
 togglePopUp();
@@ -386,4 +420,5 @@ tabs();
 addDot();
 setCommandImg();
 createValidation();
+calc();
 slider();
