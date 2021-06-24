@@ -407,6 +407,7 @@ const calc = (price = 100) => {
     let total = 0;
     let countValue = 1;
     let dayValue = 10;
+    let step = 40;
 
     const typeValue = calcType.options[calcType.selectedIndex].value;
     const squareValue = +calcSquare.value;
@@ -425,24 +426,24 @@ const calc = (price = 100) => {
       total = price * typeValue * squareValue * countValue * dayValue;
     }
 
-    totalValue.textContent = total;
+    if (+totalValue.textContent !== total) {
+      if (totalValue.textContent > total) {
+        step = -40;
+      }
+
+      const timer = setInterval(() => {
+        totalValue.textContent = +totalValue.textContent + step;
+
+        if ((total - totalValue.textContent) * step < 40) {
+          clearInterval(timer);
+          totalValue.textContent = Math.round(total);
+        }
+      }, 0);
+    }
   };
 
   calcBlock.addEventListener('change', (event) => {
     const target = event.target;
-
-    // if (
-    //   target === calcType ||
-    //   target === calcSquare ||
-    //   target === calcCount ||
-    //   target === calcDay
-    // ) {
-    // console.log(1);
-    // }
-
-    // if (target.matches('select') || target.matches('input')) {
-    //   console.log(1);
-    // }
 
     if (
       target.matches('.calc-type') ||
