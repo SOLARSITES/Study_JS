@@ -394,6 +394,25 @@ const createValidation = () => {
   form2Message.addEventListener('blur', validateFormMessage);
 };
 
+// Animation Function
+const animate = ({ timing, draw, duration }) => {
+  let start = performance.now();
+
+  requestAnimationFrame(function animate(time) {
+    let timeFraction = (time - start) / duration;
+
+    if (timeFraction > 1) timeFraction = 1;
+
+    let progress = timing(timeFraction);
+
+    draw(progress);
+
+    if (timeFraction < 1) {
+      requestAnimationFrame(animate);
+    }
+  });
+};
+
 // Calculator
 const calc = (price = 100) => {
   const calcBlock = document.querySelector('.calc-block'),
@@ -407,7 +426,7 @@ const calc = (price = 100) => {
     let total = 0;
     let countValue = 1;
     let dayValue = 10;
-    let step = 40;
+    // let step = 40;
 
     const typeValue = calcType.options[calcType.selectedIndex].value;
     const squareValue = +calcSquare.value;
@@ -426,20 +445,32 @@ const calc = (price = 100) => {
       total = price * typeValue * squareValue * countValue * dayValue;
     }
 
-    if (+totalValue.textContent !== total) {
-      if (totalValue.textContent > total) {
-        step = -40;
-      }
+    // totalValue.textContent = total;
 
-      const timer = setInterval(() => {
-        totalValue.textContent = +totalValue.textContent + step;
+    animate({
+      duration: 1500,
+      timing(timeFraction) {
+        return timeFraction;
+      },
+      draw(progress) {
+        totalValue.textContent = Math.floor(progress * +total);
+      },
+    });
 
-        if ((total - totalValue.textContent) * step < 40) {
-          clearInterval(timer);
-          totalValue.textContent = Math.round(total);
-        }
-      }, 0);
-    }
+    // if (+totalValue.textContent !== total) {
+    //   if (totalValue.textContent > total) {
+    //     step = -40;
+    //   }
+    //
+    //   const timer = setInterval(() => {
+    //     totalValue.textContent = +totalValue.textContent + step;
+    //
+    //     if ((total - totalValue.textContent) * step < 40) {
+    //       clearInterval(timer);
+    //       totalValue.textContent = Math.round(total);
+    //     }
+    //   }, 0);
+    // }
   };
 
   calcBlock.addEventListener('change', (event) => {
