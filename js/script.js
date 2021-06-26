@@ -322,88 +322,88 @@ const setCommandImg = () => {
 };
 
 // Create Validation
-const createValidation = () => {
-  const calcItems = document.querySelectorAll('input.calc-item');
-  const form1Name = document.getElementById('form1-name');
-  const form2Name = document.getElementById('form2-name');
-  const form3Name = document.getElementById('form3-name');
-  const form1Email = document.getElementById('form1-email');
-  const form2Email = document.getElementById('form2-email');
-  const form3Email = document.getElementById('form3-email');
-  const form1Phone = document.getElementById('form1-phone');
-  const form2Phone = document.getElementById('form2-phone');
-  const form3Phone = document.getElementById('form3-phone');
-  const form2Message = document.getElementById('form2-message');
-
-  const validateCalcItem = (e) => {
-    e.target.value = e.target.value.replace(/\D/g, '');
-  };
-
-  const validateFormName = (e) => {
-    e.target.value = e.target.value
-      .replace(/[^а-яё -]/gi, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
-      .replace(/\s+/g, ' ')
-      .split(' ')
-      .map((word) => {
-        if (word === '') {
-          return word;
-        }
-        return word[0].toUpperCase() + word.slice(1);
-      })
-      .join(' ');
-  };
-
-  const validateFormEmail = (e) => {
-    e.target.value = e.target.value
-      .replace(/[^a-z@\-_.!~*']/gi, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
-      .replace(/\s+/g, ' ');
-  };
-
-  const validateFormPhone = (e) => {
-    e.target.value = e.target.value
-      .replace(/[^()\-0-9]/g, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
-      .replace(/\s+/g, ' ');
-  };
-
-  const validateFormMessage = (e) => {
-    e.target.value = e.target.value
-      .replace(/[^а-яё -]/gi, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
-      .replace(/\s+/g, ' ');
-  };
-
-  calcItems.forEach((calcItem) => {
-    calcItem.addEventListener('blur', validateCalcItem);
-  });
-  form1Name.addEventListener('blur', validateFormName);
-  form2Name.addEventListener('blur', validateFormName);
-  form3Name.addEventListener('blur', validateFormName);
-  form1Email.addEventListener('blur', validateFormEmail);
-  form2Email.addEventListener('blur', validateFormEmail);
-  form3Email.addEventListener('blur', validateFormEmail);
-  form1Phone.addEventListener('blur', validateFormPhone);
-  form2Phone.addEventListener('blur', validateFormPhone);
-  form3Phone.addEventListener('blur', validateFormPhone);
-  form2Message.addEventListener('blur', validateFormMessage);
-};
+// const createValidation = () => {
+//   const calcItems = document.querySelectorAll('input.calc-item');
+//   const form1Name = document.getElementById('form1-name');
+//   const form2Name = document.getElementById('form2-name');
+//   const form3Name = document.getElementById('form3-name');
+//   const form1Email = document.getElementById('form1-email');
+//   const form2Email = document.getElementById('form2-email');
+//   const form3Email = document.getElementById('form3-email');
+//   const form1Phone = document.getElementById('form1-phone');
+//   const form2Phone = document.getElementById('form2-phone');
+//   const form3Phone = document.getElementById('form3-phone');
+//   const form2Message = document.getElementById('form2-message');
+//
+//   const validateCalcItem = (e) => {
+//     e.target.value = e.target.value.replace(/\D/g, '');
+//   };
+//
+//   const validateFormName = (e) => {
+//     e.target.value = e.target.value
+//       .replace(/[^а-яё -]/gi, '')
+//       .replace(/^[ -]+/g, '')
+//       .replace(/[ -]+$/g, '')
+//       .replace(/\s+/g, ' ')
+//       .split(' ')
+//       .map((word) => {
+//         if (word === '') {
+//           return word;
+//         }
+//         return word[0].toUpperCase() + word.slice(1);
+//       })
+//       .join(' ');
+//   };
+//
+//   const validateFormEmail = (e) => {
+//     e.target.value = e.target.value
+//       .replace(/[^a-z@\-_.!~*']/gi, '')
+//       .replace(/^[ -]+/g, '')
+//       .replace(/[ -]+$/g, '')
+//       .replace(/\s+/g, ' ');
+//   };
+//
+//   const validateFormPhone = (e) => {
+//     e.target.value = e.target.value
+//       .replace(/[^()\-0-9]/g, '')
+//       .replace(/^[ -]+/g, '')
+//       .replace(/[ -]+$/g, '')
+//       .replace(/\s+/g, ' ');
+//   };
+//
+//   const validateFormMessage = (e) => {
+//     e.target.value = e.target.value
+//       .replace(/[^а-яё -]/gi, '')
+//       .replace(/^[ -]+/g, '')
+//       .replace(/[ -]+$/g, '')
+//       .replace(/\s+/g, ' ');
+//   };
+//
+//   calcItems.forEach((calcItem) => {
+//     calcItem.addEventListener('blur', validateCalcItem);
+//   });
+//   form1Name.addEventListener('blur', validateFormName);
+//   form2Name.addEventListener('blur', validateFormName);
+//   form3Name.addEventListener('blur', validateFormName);
+//   form1Email.addEventListener('blur', validateFormEmail);
+//   form2Email.addEventListener('blur', validateFormEmail);
+//   form3Email.addEventListener('blur', validateFormEmail);
+//   form1Phone.addEventListener('blur', validateFormPhone);
+//   form2Phone.addEventListener('blur', validateFormPhone);
+//   form3Phone.addEventListener('blur', validateFormPhone);
+//   form2Message.addEventListener('blur', validateFormMessage);
+// };
 
 // Animation Function
 const animate = ({ timing, draw, duration }) => {
-  let start = performance.now();
+  const start = performance.now();
 
   requestAnimationFrame(function animate(time) {
     let timeFraction = (time - start) / duration;
 
     if (timeFraction > 1) timeFraction = 1;
 
-    let progress = timing(timeFraction);
+    const progress = timing(timeFraction);
 
     draw(progress);
 
@@ -426,7 +426,6 @@ const calc = (price = 100) => {
     let total = 0;
     let countValue = 1;
     let dayValue = 10;
-    // let step = 40;
 
     const typeValue = calcType.options[calcType.selectedIndex].value;
     const squareValue = +calcSquare.value;
@@ -445,8 +444,6 @@ const calc = (price = 100) => {
       total = price * typeValue * squareValue * countValue * dayValue;
     }
 
-    // totalValue.textContent = total;
-
     animate({
       duration: 1500,
       timing(timeFraction) {
@@ -456,21 +453,6 @@ const calc = (price = 100) => {
         totalValue.textContent = Math.floor(progress * +total);
       },
     });
-
-    // if (+totalValue.textContent !== total) {
-    //   if (totalValue.textContent > total) {
-    //     step = -40;
-    //   }
-    //
-    //   const timer = setInterval(() => {
-    //     totalValue.textContent = +totalValue.textContent + step;
-    //
-    //     if ((total - totalValue.textContent) * step < 40) {
-    //       clearInterval(timer);
-    //       totalValue.textContent = Math.round(total);
-    //     }
-    //   }, 0);
-    // }
   };
 
   calcBlock.addEventListener('change', (event) => {
@@ -493,6 +475,6 @@ togglePopUp();
 tabs();
 addDot();
 setCommandImg();
-createValidation();
+// createValidation();
 calc(100);
 slider();
