@@ -205,7 +205,6 @@ const tabs = () => {
 // Slider
 const slider = () => {
   const slide = document.querySelectorAll('.portfolio-item'),
-    // btn = document.querySelectorAll('.portfolio-btn'),
     dot = document.querySelectorAll('.dot'),
     slider = document.querySelector('.portfolio-content');
 
@@ -341,7 +340,7 @@ const createValidation = () => {
 
   const validateFormName = (e) => {
     e.target.value = e.target.value
-      .replace(/[^а-яё -]/gi, '')
+      .replace(/[^а-яё]/gi, '') // .replace(/[^а-яё -]/gi, '')
       .replace(/^[ -]+/g, '')
       .replace(/[ -]+$/g, '')
       .replace(/\s+/g, ' ')
@@ -373,37 +372,37 @@ const createValidation = () => {
 
   const validateFormMessage = (e) => {
     e.target.value = e.target.value
-      .replace(/[^а-яё -]/gi, '')
+      .replace(/[^а-яё\d -]/gi, '') // .replace(/[^а-яё -]/gi, '')
       .replace(/^[ -]+/g, '')
       .replace(/[ -]+$/g, '')
       .replace(/\s+/g, ' ');
   };
 
   calcItems.forEach((calcItem) => {
-    calcItem.addEventListener('blur', validateCalcItem);
+    calcItem.addEventListener('input', validateCalcItem);
   });
-  form1Name.addEventListener('blur', validateFormName);
-  form2Name.addEventListener('blur', validateFormName);
-  form3Name.addEventListener('blur', validateFormName);
-  form1Email.addEventListener('blur', validateFormEmail);
-  form2Email.addEventListener('blur', validateFormEmail);
-  form3Email.addEventListener('blur', validateFormEmail);
-  form1Phone.addEventListener('blur', validateFormPhone);
-  form2Phone.addEventListener('blur', validateFormPhone);
-  form3Phone.addEventListener('blur', validateFormPhone);
-  form2Message.addEventListener('blur', validateFormMessage);
+  form1Name.addEventListener('input', validateFormName);
+  form2Name.addEventListener('input', validateFormName);
+  form3Name.addEventListener('input', validateFormName);
+  form1Email.addEventListener('input', validateFormEmail);
+  form2Email.addEventListener('input', validateFormEmail);
+  form3Email.addEventListener('input', validateFormEmail);
+  form1Phone.addEventListener('input', validateFormPhone);
+  form2Phone.addEventListener('input', validateFormPhone);
+  form3Phone.addEventListener('input', validateFormPhone);
+  form2Message.addEventListener('input', validateFormMessage);
 };
 
 // Animation Function
 const animate = ({ timing, draw, duration }) => {
-  let start = performance.now();
+  const start = performance.now();
 
   requestAnimationFrame(function animate(time) {
     let timeFraction = (time - start) / duration;
 
     if (timeFraction > 1) timeFraction = 1;
 
-    let progress = timing(timeFraction);
+    const progress = timing(timeFraction);
 
     draw(progress);
 
@@ -426,7 +425,6 @@ const calc = (price = 100) => {
     let total = 0;
     let countValue = 1;
     let dayValue = 10;
-    // let step = 40;
 
     const typeValue = calcType.options[calcType.selectedIndex].value;
     const squareValue = +calcSquare.value;
@@ -445,8 +443,6 @@ const calc = (price = 100) => {
       total = price * typeValue * squareValue * countValue * dayValue;
     }
 
-    // totalValue.textContent = total;
-
     animate({
       duration: 1500,
       timing(timeFraction) {
@@ -456,21 +452,6 @@ const calc = (price = 100) => {
         totalValue.textContent = Math.floor(progress * +total);
       },
     });
-
-    // if (+totalValue.textContent !== total) {
-    //   if (totalValue.textContent > total) {
-    //     step = -40;
-    //   }
-    //
-    //   const timer = setInterval(() => {
-    //     totalValue.textContent = +totalValue.textContent + step;
-    //
-    //     if ((total - totalValue.textContent) * step < 40) {
-    //       clearInterval(timer);
-    //       totalValue.textContent = Math.round(total);
-    //     }
-    //   }, 0);
-    // }
   };
 
   calcBlock.addEventListener('change', (event) => {
@@ -487,6 +468,56 @@ const calc = (price = 100) => {
   });
 };
 
+// Send-AJAX-Form
+const sendForm = () => {
+  const errorMessage = 'Что-то пошло не так...';
+  const loadMessage = 'Загрузка...';
+  const successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+
+  const form = document.getElementById('form1');
+  const statusMessage = document.createElement('div');
+
+  statusMessage.style.cssText = 'font-size: 2rem;';
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const request = new XMLHttpRequest();
+    const formData = new FormData(form);
+    const body = {};
+
+    /*
+    for (let val of formData.entries()) {
+      body[val[0]] = val[1];
+    }
+    */
+
+    formData.forEach((val, key) => {
+      body[key] = val;
+    });
+
+    request.addEventListener('readystatechange', () => {
+      statusMessage.textContent = loadMessage;
+
+      if (request.readyState !== 4) {
+        return;
+      }
+
+      if (request.status === 200) {
+        statusMessage.textContent = successMessage;
+      } else {
+        statusMessage.textContent = errorMessage;
+      }
+    });
+
+    request.open('POST', './server.php');
+    request.setRequestHeader('Content-Type', 'application/json');
+
+    request.send(JSON.stringify(body));
+    form.appendChild(statusMessage);
+  });
+};
+
 countTimer('17 Jun 2021');
 toggleMenu();
 togglePopUp();
@@ -496,3 +527,4 @@ setCommandImg();
 createValidation();
 calc(100);
 slider();
+sendForm();
