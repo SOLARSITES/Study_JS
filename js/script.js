@@ -340,9 +340,9 @@ const createValidation = () => {
 
   const validateFormName = (e) => {
     e.target.value = e.target.value
-      .replace(/[^а-яё]/gi, '') // .replace(/[^а-яё -]/gi, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
+      .replace(/[^а-яё ]/gi, '') // .replace(/[^а-яё -]/gi, '')
+      // .replace(/^[ -]+/g, '')
+      // .replace(/[ -]+$/g, '')
       .replace(/\s+/g, ' ')
       .split(' ')
       .map((word) => {
@@ -356,25 +356,24 @@ const createValidation = () => {
 
   const validateFormEmail = (e) => {
     e.target.value = e.target.value
-      .replace(/[^a-z@\-_.!~*']/gi, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
-      .replace(/\s+/g, ' ');
+      .replace(/[^a-z@\-_.']/gi, '') // .replace(/[^a-z@\-_.!~*']/gi, '')
+      // .replace(/^[ -]+/g, '')
+      // .replace(/[ -]+$/g, '')
+      .replace(/\s+/g, '');
   };
 
   const validateFormPhone = (e) => {
-    e.target.value = e.target.value
-      .replace(/[^()\-0-9]/g, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
-      .replace(/\s+/g, ' ');
+    e.target.value = e.target.value.replace(/[^+\d]/g, ''); // .replace(/[^()\-0-9]/g, '')
+    // .replace(/^[ -]+/g, '')
+    // .replace(/[ -]+$/g, '')
+    // .replace(/\s+/g, ' ');
   };
 
   const validateFormMessage = (e) => {
     e.target.value = e.target.value
-      .replace(/[^а-яё\d -]/gi, '') // .replace(/[^а-яё -]/gi, '')
-      .replace(/^[ -]+/g, '')
-      .replace(/[ -]+$/g, '')
+      .replace(/[^а-яё\d ,.!?-]/gi, '') // .replace(/[^а-яё -]/gi, '')
+      // .replace(/^[ -]+/g, '')
+      // .replace(/[ -]+$/g, '')
       .replace(/\s+/g, ' ');
   };
 
@@ -474,48 +473,93 @@ const sendForm = () => {
   const loadMessage = 'Загрузка...';
   const successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
-  const form = document.getElementById('form1');
-  const statusMessage = document.createElement('div');
-
-  statusMessage.style.cssText = 'font-size: 2rem;';
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
+  const postData = (body, outputData, errorData) => {
     const request = new XMLHttpRequest();
-    const formData = new FormData(form);
-    const body = {};
-
-    /*
-    for (let val of formData.entries()) {
-      body[val[0]] = val[1];
-    }
-    */
-
-    formData.forEach((val, key) => {
-      body[key] = val;
-    });
 
     request.addEventListener('readystatechange', () => {
-      statusMessage.textContent = loadMessage;
-
       if (request.readyState !== 4) {
         return;
       }
 
       if (request.status === 200) {
-        statusMessage.textContent = successMessage;
+        outputData();
       } else {
-        statusMessage.textContent = errorMessage;
+        errorData(request.status);
       }
     });
 
     request.open('POST', './server.php');
+    // request.setRequestHeader('Content-Type', 'multipart/form-data');
     request.setRequestHeader('Content-Type', 'application/json');
-
+    // request.send(formData);
     request.send(JSON.stringify(body));
-    form.appendChild(statusMessage);
-  });
+  };
+
+  const clearInput = (idForm) => {
+    const form = document.getElementById(idForm);
+
+    [...form.elements]
+      .filter((item) => item.tagName.toLowerCase() !== 'button' && item.type !== 'button')
+      .forEach((item) => (item.value = ''));
+  };
+
+  // const isValid = (event) => {
+  //   const target = event.target;
+  //   if (target.matches('.form-phone')) {
+  //     target.value = target.value.replace(/[^+\d]/g, '');
+  //   }
+  //   if (target.name === 'user_name') {
+  //     target.value = target.value.replace(/[^а-яё ]/gi, '');
+  //   }
+  //   if (target.matches('.mess')) {
+  //     target.value = target.value.replace(/[^а-яё ,.]/gi, '');
+  //   }
+  // };
+
+  const processingForm = (idForm) => {
+    const form = document.getElementById(idForm);
+    const statusMessage = document.createElement('div');
+
+    // statusMessage.textContent = 'Тут будет сообщение!';
+    statusMessage.style.cssText = 'font-size: 2rem; color: #fff';
+    // form.appendChild(statusMessage);
+
+    form.addEventListener('submit', (event) => {
+      const formData = new FormData(form);
+      const body = {};
+
+      statusMessage.textContent = loadMessage;
+      event.preventDefault();
+      form.appendChild(statusMessage);
+
+      /*
+      for (let val of formData.entries()) {
+        body[val[0]] = val[1];
+      }
+      */
+
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+
+      postData(
+        body,
+        () => {
+          statusMessage.textContent = successMessage;
+          clearInput(idForm);
+        },
+        (error) => {
+          statusMessage.textContent = errorMessage;
+          console.error(error);
+        },
+      );
+    });
+    form.addEventListener('input', createValidation);
+  };
+
+  processingForm('form1');
+  processingForm('form2');
+  processingForm('form3');
 };
 
 countTimer('17 Jun 2021');
