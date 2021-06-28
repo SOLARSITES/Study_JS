@@ -469,9 +469,12 @@ const calc = (price = 100) => {
 
 // Send-AJAX-Form
 const sendForm = () => {
-  const errorMessage = 'Что-то пошло не так...';
-  const loadMessage = 'Загрузка...';
-  const successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+  const errorMessage = ' Что-то пошло не так...';
+  const loadMessage = ' Загрузка...';
+  const successMessage = ' Спасибо! Мы скоро с вами свяжемся!';
+  const errorImg = './images/message/error.png';
+  const loadImg = './images/message/load.gif';
+  const successImg = './images/message/success.png';
 
   const postData = (body, outputData, errorData) => {
     const request = new XMLHttpRequest();
@@ -489,9 +492,7 @@ const sendForm = () => {
     });
 
     request.open('POST', './server.php');
-    // request.setRequestHeader('Content-Type', 'multipart/form-data');
     request.setRequestHeader('Content-Type', 'application/json');
-    // request.send(formData);
     request.send(JSON.stringify(body));
   };
 
@@ -506,24 +507,20 @@ const sendForm = () => {
   const processingForm = (idForm) => {
     const form = document.getElementById(idForm);
     const statusMessage = document.createElement('div');
+    const img = document.createElement('img');
 
-    // statusMessage.textContent = 'Тут будет сообщение!';
     statusMessage.style.cssText = 'font-size: 2rem; color: #fff';
-    // form.appendChild(statusMessage);
+    img.height = 28;
 
     form.addEventListener('submit', (event) => {
       const formData = new FormData(form);
       const body = {};
 
-      statusMessage.textContent = loadMessage;
       event.preventDefault();
+      statusMessage.textContent = loadMessage;
+      img.src = loadImg;
+      statusMessage.insertBefore(img, statusMessage.firstChild);
       form.appendChild(statusMessage);
-
-      /*
-      for (let val of formData.entries()) {
-        body[val[0]] = val[1];
-      }
-      */
 
       formData.forEach((val, key) => {
         body[key] = val;
@@ -533,10 +530,14 @@ const sendForm = () => {
         body,
         () => {
           statusMessage.textContent = successMessage;
+          img.src = successImg;
+          statusMessage.insertBefore(img, statusMessage.firstChild);
           clearInput(idForm);
         },
         (error) => {
           statusMessage.textContent = errorMessage;
+          img.src = errorImg;
+          statusMessage.insertBefore(img, statusMessage.firstChild);
           console.error(error);
         },
       );
