@@ -503,19 +503,6 @@ const sendForm = () => {
       .forEach((item) => (item.value = ''));
   };
 
-  // const isValid = (event) => {
-  //   const target = event.target;
-  //   if (target.matches('.form-phone')) {
-  //     target.value = target.value.replace(/[^+\d]/g, '');
-  //   }
-  //   if (target.name === 'user_name') {
-  //     target.value = target.value.replace(/[^а-яё ]/gi, '');
-  //   }
-  //   if (target.matches('.mess')) {
-  //     target.value = target.value.replace(/[^а-яё ,.]/gi, '');
-  //   }
-  // };
-
   const processingForm = (idForm) => {
     const form = document.getElementById(idForm);
     const statusMessage = document.createElement('div');
