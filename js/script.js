@@ -533,10 +533,20 @@ const sendForm = () => {
         body,
         () => {
           statusMessage.textContent = successMessage;
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+
           clearInput(idForm);
         },
         (error) => {
           statusMessage.textContent = errorMessage;
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+
           console.error(error);
         },
       );
