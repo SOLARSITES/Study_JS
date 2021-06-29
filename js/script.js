@@ -532,12 +532,22 @@ const sendForm = () => {
           statusMessage.textContent = successMessage;
           img.src = successImg;
           statusMessage.insertBefore(img, statusMessage.firstChild);
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+
           clearInput(idForm);
         },
         (error) => {
           statusMessage.textContent = errorMessage;
           img.src = errorImg;
           statusMessage.insertBefore(img, statusMessage.firstChild);
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+
           console.error(error);
         },
       );
