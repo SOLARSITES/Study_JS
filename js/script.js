@@ -469,13 +469,16 @@ const calc = (price = 100) => {
 
 // Send-AJAX-Form
 const sendForm = () => {
+  /*
   const errorMessage = ' Что-то пошло не так...';
   const loadMessage = ' Загрузка...';
   const successMessage = ' Спасибо! Мы скоро с вами свяжемся!';
   const errorImg = './images/message/error.png';
   const loadImg = './images/message/load.gif';
   const successImg = './images/message/success.png';
+  */
 
+  /*
   const postData = (body, outputData, errorData) => {
     const request = new XMLHttpRequest();
 
@@ -495,6 +498,29 @@ const sendForm = () => {
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify(body));
   };
+  */
+
+  const postData = (body) => {
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest();
+
+      request.addEventListener('readystatechange', () => {
+        if (request.readyState !== 4) {
+          return;
+        }
+
+        if (request.status === 200) {
+          resolve();
+        } else {
+          reject(request.status);
+        }
+      });
+
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(body));
+    });
+  };
 
   const clearInput = (idForm) => {
     const form = document.getElementById(idForm);
@@ -507,25 +533,48 @@ const sendForm = () => {
   const processingForm = (idForm) => {
     const form = document.getElementById(idForm);
     const statusMessage = document.createElement('div');
-    const img = document.createElement('img');
+
+    const showStatus = (status) => {
+      const img = document.createElement('img');
+
+      const statusList = {
+        load: {
+          message: ' Загрузка...',
+          img: './images/message/load.gif',
+        },
+        error: {
+          message: ' Что-то пошло не так...',
+          img: './images/message/error.png',
+        },
+        success: {
+          message: ' Спасибо! Мы скоро с вами свяжемся!',
+          img: './images/message/success.png',
+        },
+      };
+      statusMessage.textContent = statusList[status].message;
+      img.src = statusList[status].img;
+      img.height = 28;
+
+      statusMessage.insertBefore(img, statusMessage.firstChild);
+    };
 
     statusMessage.style.cssText = 'font-size: 2rem; color: #fff';
-    img.height = 28;
 
     form.addEventListener('submit', (event) => {
       const formData = new FormData(form);
       const body = {};
 
       event.preventDefault();
-      statusMessage.textContent = loadMessage;
-      img.src = loadImg;
-      statusMessage.insertBefore(img, statusMessage.firstChild);
+
+      showStatus('load');
+
       form.appendChild(statusMessage);
 
       formData.forEach((val, key) => {
         body[key] = val;
       });
 
+      /*
       postData(
         body,
         () => {
@@ -551,6 +600,27 @@ const sendForm = () => {
           console.error(error);
         },
       );
+      */
+
+      postData(body)
+        .then(() => {
+          showStatus('success');
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+
+          clearInput(idForm);
+        })
+        .catch((error) => {
+          showStatus('error');
+
+          setTimeout(() => {
+            statusMessage.remove();
+          }, 5000);
+
+          console.error(error);
+        });
     });
     form.addEventListener('input', createValidation);
   };
