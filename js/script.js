@@ -469,38 +469,16 @@ const calc = (price = 100) => {
 
 // Send-AJAX-Form
 const sendForm = () => {
-  /*
-  const errorMessage = ' Что-то пошло не так...';
-  const loadMessage = ' Загрузка...';
-  const successMessage = ' Спасибо! Мы скоро с вами свяжемся!';
-  const errorImg = './images/message/error.png';
-  const loadImg = './images/message/load.gif';
-  const successImg = './images/message/success.png';
-  */
-
-  /*
-  const postData = (body, outputData, errorData) => {
-    const request = new XMLHttpRequest();
-
-    request.addEventListener('readystatechange', () => {
-      if (request.readyState !== 4) {
-        return;
-      }
-
-      if (request.status === 200) {
-        outputData();
-      } else {
-        errorData(request.status);
-      }
-    });
-
-    request.open('POST', './server.php');
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.send(JSON.stringify(body));
-  };
-  */
-
   const postData = (body) => {
+    return fetch('./server.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+      credentials: 'include',
+    });
+    /*
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
 
@@ -520,18 +498,21 @@ const sendForm = () => {
       request.setRequestHeader('Content-Type', 'application/json');
       request.send(JSON.stringify(body));
     });
+    */
   };
 
-  const clearInput = (idForm) => {
-    const form = document.getElementById(idForm);
+  // const clearInput = (idForm) => {
+  const clearInput = (form) => {
+    // const form = document.getElementById(idForm);
 
     [...form.elements]
       .filter((item) => item.tagName.toLowerCase() !== 'button' && item.type !== 'button')
       .forEach((item) => (item.value = ''));
   };
 
-  const processingForm = (idForm) => {
-    const form = document.getElementById(idForm);
+  // const processingForm = (idForm) => {
+  const processingForm = (form) => {
+    // const form = document.getElementById(idForm);
     const statusMessage = document.createElement('div');
 
     const showStatus = (status) => {
@@ -547,20 +528,27 @@ const sendForm = () => {
           img: './images/message/error.png',
         },
         success: {
-          message: ' Спасибо! Мы скоро с вами свяжемся!',
+          message: ' Спасибо! Мы скоро с вами свяжемся!',
           img: './images/message/success.png',
         },
       };
       statusMessage.textContent = statusList[status].message;
       img.src = statusList[status].img;
-      img.height = 28;
+      // img.height = 28;
+      img.style.cssText = 'width: 28px; margin-right: 0.7rem;';
 
       statusMessage.insertBefore(img, statusMessage.firstChild);
     };
 
-    statusMessage.style.cssText = 'font-size: 2rem; color: #fff';
+    statusMessage.style.cssText =
+      'color: #fff; font-size: 1.7rem; margin: 1rem 0; display: flex; align-items: center; justify-content: center;';
 
     form.addEventListener('submit', (event) => {
+      /*
+      const formData = new FormData(form);
+      const body = {};
+      */
+
       const formData = new FormData(form);
       const body = {};
 
@@ -570,47 +558,31 @@ const sendForm = () => {
 
       form.appendChild(statusMessage);
 
+      /*
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+      */
+
       formData.forEach((val, key) => {
         body[key] = val;
       });
 
-      /*
-      postData(
-        body,
-        () => {
-          statusMessage.textContent = successMessage;
-          img.src = successImg;
-          statusMessage.insertBefore(img, statusMessage.firstChild);
-
-          setTimeout(() => {
-            statusMessage.remove();
-          }, 5000);
-
-          clearInput(idForm);
-        },
-        (error) => {
-          statusMessage.textContent = errorMessage;
-          img.src = errorImg;
-          statusMessage.insertBefore(img, statusMessage.firstChild);
-
-          setTimeout(() => {
-            statusMessage.remove();
-          }, 5000);
-
-          console.error(error);
-        },
-      );
-      */
-
+      // postData(Object.fromEntries(new FormData(form)))
       postData(body)
-        .then(() => {
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error(`Network status: ${response.status}`);
+          }
+
           showStatus('success');
 
           setTimeout(() => {
             statusMessage.remove();
           }, 5000);
 
-          clearInput(idForm);
+          // clearInput(idForm);
+          clearInput(form);
         })
         .catch((error) => {
           showStatus('error');
@@ -625,9 +597,12 @@ const sendForm = () => {
     form.addEventListener('input', createValidation);
   };
 
-  processingForm('form1');
-  processingForm('form2');
-  processingForm('form3');
+  // processingForm('form1');
+  // processingForm('form2');
+  // processingForm('form3');
+  document.querySelectorAll('form').forEach((elem) => {
+    processingForm(elem);
+  });
 };
 
 countTimer('17 Jun 2021');
