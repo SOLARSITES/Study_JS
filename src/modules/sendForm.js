@@ -68,9 +68,16 @@ const sendForm = () => {
 
   const processingForm = (form) => {
     const statusMessage = document.createElement('div');
+    let interval = 0;
+
+    const clearStatus = () => {
+      statusMessage.textContent = '';
+      clearInterval(interval);
+    };
 
     const showStatus = (status) => {
       const img = document.createElement('img');
+      const getTimeout = 5000;
 
       const statusList = {
         load: {
@@ -91,6 +98,12 @@ const sendForm = () => {
       img.style.cssText = 'width: 28px; margin-right: 0.7rem;';
 
       statusMessage.insertBefore(img, statusMessage.firstChild);
+
+      if (status === 'success' || status === 'error') {
+        interval = setInterval(clearStatus, getTimeout);
+      } else if (interval > 0) {
+        clearInterval(interval);
+      }
     };
 
     statusMessage.style.cssText =
@@ -101,8 +114,9 @@ const sendForm = () => {
       const body = {};
 
       event.preventDefault();
-      showStatus('load');
       form.appendChild(statusMessage);
+
+      showStatus('load');
 
       formData.forEach((val, key) => {
         body[key] = val;
@@ -113,22 +127,11 @@ const sendForm = () => {
           if (response.status !== 200) {
             throw new Error(`Network status: ${response.status}`);
           }
-
           showStatus('success');
-
-          setTimeout(() => {
-            statusMessage.remove();
-          }, 5000);
-
           clearInput(form);
         })
         .catch((error) => {
           showStatus('error');
-
-          setTimeout(() => {
-            statusMessage.remove();
-          }, 5000);
-
           console.error(error);
         });
     });
