@@ -1,10 +1,11 @@
 const calc = (price = 100) => {
-  const calcBlock = document.querySelector('.calc-block'),
-    calcType = document.querySelector('.calc-type'),
-    calcSquare = document.querySelector('.calc-square'),
-    calcCount = document.querySelector('.calc-count'),
-    calcDay = document.querySelector('.calc-day'),
-    totalValue = document.getElementById('total');
+  const calcBlock = document.querySelector('.calc-block');
+  const calcType = document.querySelector('.calc-type');
+  const calcSquare = document.querySelector('.calc-square');
+  const calcCount = document.querySelector('.calc-count');
+  const calcDay = document.querySelector('.calc-day');
+  const totalValue = document.getElementById('total');
+  const calcItems = document.querySelectorAll('input.calc-item');
 
   const animate = ({ timing, draw, duration }) => {
     const start = performance.now();
@@ -68,6 +69,12 @@ const calc = (price = 100) => {
     ) {
       countSum();
     }
+  });
+
+  calcItems.forEach((calcItem) => {
+    calcItem.addEventListener('input', (event) => {
+      event.target.value = event.target.value.replace(/\D/g, '');
+    });
   });
 };
 

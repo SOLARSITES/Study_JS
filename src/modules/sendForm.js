@@ -8,40 +8,15 @@ const sendForm = () => {
       body: JSON.stringify(body),
       credentials: 'include',
     });
-    /*
-    return new Promise((resolve, reject) => {
-      const request = new XMLHttpRequest();
-
-      request.addEventListener('readystatechange', () => {
-        if (request.readyState !== 4) {
-          return;
-        }
-
-        if (request.status === 200) {
-          resolve();
-        } else {
-          reject(request.status);
-        }
-      });
-
-      request.open('POST', './server.php');
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.send(JSON.stringify(body));
-    });
-    */
   };
 
-  // const clearInput = (idForm) => {
   const clearInput = (form) => {
-    // const form = document.getElementById(idForm);
-
     [...form.elements]
       .filter((item) => item.tagName.toLowerCase() !== 'button' && item.type !== 'button')
       .forEach((item) => (item.value = ''));
   };
 
   const createValidation = () => {
-    const calcItems = document.querySelectorAll('input.calc-item');
     const form1Name = document.getElementById('form1-name');
     const form2Name = document.getElementById('form2-name');
     const form3Name = document.getElementById('form3-name');
@@ -52,10 +27,6 @@ const sendForm = () => {
     const form2Phone = document.getElementById('form2-phone');
     const form3Phone = document.getElementById('form3-phone');
     const form2Message = document.getElementById('form2-message');
-
-    const validateCalcItem = (e) => {
-      e.target.value = e.target.value.replace(/\D/g, '');
-    };
 
     const validateFormName = (e) => {
       e.target.value = e.target.value
@@ -83,9 +54,6 @@ const sendForm = () => {
       e.target.value = e.target.value.replace(/[^а-яё\d ,.!?-]/gi, '').replace(/\s+/g, ' ');
     };
 
-    calcItems.forEach((calcItem) => {
-      calcItem.addEventListener('input', validateCalcItem);
-    });
     form1Name.addEventListener('input', validateFormName);
     form2Name.addEventListener('input', validateFormName);
     form3Name.addEventListener('input', validateFormName);
@@ -98,9 +66,7 @@ const sendForm = () => {
     form2Message.addEventListener('input', validateFormMessage);
   };
 
-  // const processingForm = (idForm) => {
   const processingForm = (form) => {
-    // const form = document.getElementById(idForm);
     const statusMessage = document.createElement('div');
 
     const showStatus = (status) => {
@@ -122,7 +88,6 @@ const sendForm = () => {
       };
       statusMessage.textContent = statusList[status].message;
       img.src = statusList[status].img;
-      // img.height = 28;
       img.style.cssText = 'width: 28px; margin-right: 0.7rem;';
 
       statusMessage.insertBefore(img, statusMessage.firstChild);
@@ -132,31 +97,17 @@ const sendForm = () => {
       'color: #fff; font-size: 1.7rem; margin: 1rem 0; display: flex; align-items: center; justify-content: center;';
 
     form.addEventListener('submit', (event) => {
-      /*
-      const formData = new FormData(form);
-      const body = {};
-      */
-
       const formData = new FormData(form);
       const body = {};
 
       event.preventDefault();
-
       showStatus('load');
-
       form.appendChild(statusMessage);
 
-      /*
-      formData.forEach((val, key) => {
-        body[key] = val;
-      });
-      */
-
       formData.forEach((val, key) => {
         body[key] = val;
       });
 
-      // postData(Object.fromEntries(new FormData(form)))
       postData(body)
         .then((response) => {
           if (response.status !== 200) {
@@ -169,7 +120,6 @@ const sendForm = () => {
             statusMessage.remove();
           }, 5000);
 
-          // clearInput(idForm);
           clearInput(form);
         })
         .catch((error) => {
@@ -185,9 +135,6 @@ const sendForm = () => {
     form.addEventListener('input', createValidation);
   };
 
-  // processingForm('form1');
-  // processingForm('form2');
-  // processingForm('form3');
   document.querySelectorAll('form').forEach((elem) => {
     processingForm(elem);
   });
