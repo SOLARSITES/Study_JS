@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
@@ -9,12 +8,18 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
   },
   mode: 'development',
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 100,
+  },
   devServer: {
     open: true,
-    port: 8080,
+    port: 3000,
     hot: true,
+    inline: true,
     writeToDisk: true,
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, './'),
+    watchContentBase: true,
   },
   module: {
     rules: [
@@ -30,12 +35,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'webpack Boilerplate',
-      template: path.resolve(__dirname, './src/template.html'), // шаблон
-      filename: 'index.html', // название выходного файла
-    }),
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [new CleanWebpackPlugin()],
 };

@@ -1,13 +1,14 @@
 const togglePopUp = () => {
-  const popup = document.querySelector('.popup'),
-    popupBtn = document.querySelectorAll('.popup-btn'),
-    popupContent = document.querySelector('.popup-content'),
-    popupData = {
-      count: -445,
-      speed: 20,
-      startPos: -445,
-      endPos: 0,
-    };
+  const html = document.querySelector('html');
+  const popup = document.querySelector('.popup');
+  const popupBtn = document.querySelectorAll('.popup-btn');
+  const popupContent = document.querySelector('.popup-content');
+  const popupData = {
+    count: -445,
+    speed: 20,
+    startPos: -445,
+    endPos: 0,
+  };
 
   const showPopup = () => {
     popupData.startPos > popupData.endPos
@@ -29,6 +30,7 @@ const togglePopUp = () => {
   popupBtn.forEach((elem) => {
     elem.addEventListener('click', () => {
       popup.style.display = 'block';
+      html.style.cssText = 'overflow-y: hidden; margin-right: 15px';
 
       if (screen.width > 768) {
         popupData.count = popupData.startPos;
@@ -42,11 +44,13 @@ const togglePopUp = () => {
 
     if (target.classList.contains('popup-close')) {
       popup.style.display = 'none';
+      html.style.cssText = 'overflow-y: visible;';
     } else {
       target = target.closest('.popup-content');
 
       if (!target) {
         popup.style.display = 'none';
+        html.style.cssText = 'overflow-y: visible;';
       }
     }
   });

@@ -1,7 +1,7 @@
 const toggleMenu = () => {
   const animateScroll = () => {
     const target = event.target.closest('[href^="#"]'),
-      speed = 0.5;
+      speed = 0.25;
 
     if (target) {
       const pageY = window.pageYOffset,
@@ -51,7 +51,18 @@ const toggleMenu = () => {
   };
 
   document.body.addEventListener('click', handlerMenu);
-  document.querySelector('main>a').addEventListener('click', animateScroll);
+  document.querySelector('menu a').addEventListener('click', (event) => {
+    event.preventDefault();
+  });
+  document.querySelectorAll('menu li a').forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  });
+  document.querySelector('main a').addEventListener('click', (event) => {
+    event.preventDefault();
+    animateScroll();
+  });
 };
 
 export default toggleMenu;
