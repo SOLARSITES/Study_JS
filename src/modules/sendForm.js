@@ -131,7 +131,7 @@ const sendForm = () => {
 
     const showStatus = (status) => {
       const img = document.createElement('img');
-      const getTimeout = 5000;
+      const getTimeout = 4000;
 
       const statusList = {
         load: {
