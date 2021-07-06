@@ -7,6 +7,7 @@ import addDot from './modules/addDot';
 import setCommandImg from './modules/setCommandImg';
 import calc from './modules/calc';
 import slider from './modules/slider';
+import sliderCarousel from './modules/sliderCarousel';
 import sendForm from './modules/sendForm';
 
 // Timer
@@ -25,5 +26,7 @@ setCommandImg();
 calc(100);
 // Slider
 slider();
+// Slider Carousel
+sliderCarousel();
 // Send-AJAX-Form
 sendForm();
