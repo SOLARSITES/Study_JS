@@ -8,10 +8,10 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
   },
   mode: 'development',
-  watch: true,
-  watchOptions: {
-    aggregateTimeout: 100,
-  },
+  // watch: true,
+  // watchOptions: {
+  //   aggregateTimeout: 100,
+  // },
   devServer: {
     open: true,
     port: 3000,
