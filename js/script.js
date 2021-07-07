@@ -36,7 +36,7 @@ class Todo {
             .querySelectorAll('form input, form select, form textarea, form button')
             .forEach((elem) => elem.removeAttribute('disabled', 'disabled'));
           document.querySelector('.header-input').focus();
-        }, 1000);
+        }, 1500);
 
         // alert('Нельзя добавить пустую задачу!');
       }
