@@ -15,11 +15,31 @@ class Todo {
     this.todoList.forEach(this.renderItem, this);
 
     document.querySelector(this.toForm).append(this.elementsForm.form);
+
     this.elementsForm.form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      this.addTodo(this.elementsForm.input.value);
-      this.elementsForm.form.reset();
+      this.elementsForm.input.value = this.elementsForm.input.value.trim();
+
+      if (this.elementsForm.input.value) {
+        this.addTodo(this.elementsForm.input.value);
+        this.elementsForm.form.reset();
+      } else {
+        this.elementsForm.input.value = 'Нельзя добавить пустую задачу!';
+        document
+          .querySelectorAll('form input, form select, form textarea, form button')
+          .forEach((elem) => elem.setAttribute('disabled', 'disabled'));
+
+        setTimeout(() => {
+          this.elementsForm.input.value = '';
+          document
+            .querySelectorAll('form input, form select, form textarea, form button')
+            .forEach((elem) => elem.removeAttribute('disabled', 'disabled'));
+          document.querySelector('.header-input').focus();
+        }, 1000);
+
+        // alert('Нельзя добавить пустую задачу!');
+      }
     });
 
     document.querySelector(this.toLists).append(this.lists.todo, this.lists.todoCompleted);
@@ -56,6 +76,8 @@ class Todo {
     this.todoList = this.todoList.filter((item) => item.id !== id);
     this.setLocalStorage();
     elem.remove();
+
+    document.querySelector('.header-input').focus();
   }
 
   changeTodo(id, elem) {
@@ -65,6 +87,8 @@ class Todo {
 
     item.check = !item.check;
     this.setLocalStorage();
+
+    document.querySelector('.header-input').focus();
   }
 
   editTodo() {}
@@ -83,6 +107,9 @@ class FormTodo {
 
     form.classList.add('todo-control');
     input.classList.add('header-input');
+    input.setAttribute('type', 'text');
+    input.placeholder = 'Какие планы?';
+    input.autofocus = true;
     button.style.cssText = `
       width: 50px;
       height: 50px;
