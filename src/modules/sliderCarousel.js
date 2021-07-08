@@ -10,19 +10,18 @@ class SliderCarousel {
     responsive = [],
   }) {
     if (!main || !wrap) {
-      console.warn('sliderCarousel: Необходимо добавить селекторы оберток — "main" и "wrap"!');
+      console.warn('slider-carousel: Необходимо 2 свойства, "main" и "wrap"!!!');
     }
     this.main = document.querySelector(main);
     this.wrap = document.querySelector(wrap);
+    this.slides = document.querySelector(wrap).children;
     this.next = document.querySelector(next);
     this.prev = document.querySelector(prev);
-    this.slides = document.querySelector(wrap).children;
     this.slidesToShow = slidesToShow;
     this.options = {
-      infinity,
       position,
+      infinity,
       widthSlide: Math.floor(100 / this.slidesToShow),
-      maxPosition: this.slides.length - this.slidesToShow,
     };
     this.responsive = responsive;
   }
@@ -30,7 +29,6 @@ class SliderCarousel {
   init() {
     this.addGloClass();
     this.addStyle();
-
     if (this.prev && this.next) {
       this.controlSlider();
     } else {
@@ -46,7 +44,6 @@ class SliderCarousel {
   addGloClass() {
     this.main.classList.add('glo-slider');
     this.wrap.classList.add('glo-slider__wrap');
-
     for (const item of this.slides) {
       item.classList.add('glo-slider__item');
     }
@@ -59,14 +56,14 @@ class SliderCarousel {
       style = document.createElement('style');
       style.id = 'sliderCarousel-style';
     }
-
     style.textContent = `
       .glo-slider {
-        // position: relative !important;
         overflow: hidden !important;
       }
       .glo-slider__wrap {
         display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         transition: transform 0.5s !important;
         will-change: transform !important;
       }
@@ -75,9 +72,10 @@ class SliderCarousel {
         align-items: center !important;
         justify-content: center !important;
         flex: 0 0 ${this.options.widthSlide}% !important;
-        margin: auto 0 !important;
+        margin: 0 !important;
       }
     `;
+
     document.head.appendChild(style);
   }
 
@@ -89,13 +87,9 @@ class SliderCarousel {
   prevSlider() {
     if (this.options.infinity || this.options.position > 0) {
       --this.options.position;
-
-      // console.log(--this.options.position);
-
       if (this.options.position < 0) {
-        this.options.position = this.options.maxPosition;
+        this.options.position = this.slides.length - this.slidesToShow;
       }
-
       this.wrap.style.transform = `translateX(-${
         this.options.position * this.options.widthSlide
       }%)`;
@@ -103,15 +97,11 @@ class SliderCarousel {
   }
 
   nextSlider() {
-    if (this.options.infinity || this.options.position < this.options.maxPosition) {
+    if (this.options.infinity || this.options.position < this.slides.length - this.slidesToShow) {
       ++this.options.position;
-
-      // console.log(++this.options.position);
-
-      if (this.options.position > this.options.maxPosition) {
+      if (this.options.position > this.slides.length - this.slidesToShow) {
         this.options.position = 0;
       }
-
       this.wrap.style.transform = `translateX(-${
         this.options.position * this.options.widthSlide
       }%)`;
@@ -119,38 +109,6 @@ class SliderCarousel {
   }
 
   addArrow() {
-    const style = document.createElement('style');
-
-    style.textContent = `
-      .glo-slider__prev,
-      .glo-slider__next {
-        margin: 0 10px;
-        border: 20px solid transparent;
-        background: transparent;
-      }
-      .glo-slider__prev {
-        // position: absolute;
-        // left: -40px;
-        // top: 20%;
-        border-right-color: #19b5fe;
-      }
-      .glo-slider__next {
-        // position: absolute;
-        // right: -40px;
-        // top: 20%;
-        border-left-color: #19b5fe;
-      }
-      .glo-slider__prev:hover,
-      .glo-slider__next:hover,
-      .glo-slider__prev:focus,
-      .glo-slider__next:focus {
-        background: transparent;
-        outline: transparent;
-      }
-    `;
-
-    document.head.appendChild(style);
-
     this.prev = document.createElement('button');
     this.next = document.createElement('button');
 
@@ -159,6 +117,30 @@ class SliderCarousel {
 
     this.main.appendChild(this.prev);
     this.main.appendChild(this.next);
+
+    const style = document.createElement('style');
+    style.textContent = `
+      .glo-slider__prev,
+      .glo-slider__next {
+        margin: 0 10px;
+        border: 20px solid transparent;
+        background: transparent;
+      }
+      .glo-slider__next {
+        border-left-color: #19d5fe;
+      }
+      .glo-slider__prev {
+        border-right-color: #19d5fe;
+      }
+      .glo-slider__prev:hover,
+      .glo-slider__next:hover,
+      .glo-slider__prev:focus,
+      .glo-slider__next:focus {
+        background: transparent;
+        outline: none
+      }
+    `;
+    document.head.appendChild(style);
   }
 
   responseInit() {
@@ -174,19 +156,25 @@ class SliderCarousel {
           if (widthWindow < allResponse[i]) {
             this.slidesToShow = this.responsive[i].slidesToShow;
             this.options.widthSlide = Math.floor(100 / this.slidesToShow);
+            this.wrap.style.transform = `translateX(-${
+              this.options.position * this.options.widthSlide
+            }%)`;
             this.addStyle();
           }
         }
       } else {
         this.slidesToShow = slidesToShowDefault;
         this.options.widthSlide = Math.floor(100 / this.slidesToShow);
+        this.wrap.style.transform = `translateX(-${
+          this.options.position * this.options.widthSlide
+        }%)`;
         this.addStyle();
       }
     };
 
-    window.addEventListener('resize', checkResponse);
-
     checkResponse();
+
+    window.addEventListener('resize', checkResponse);
   }
 }
 
