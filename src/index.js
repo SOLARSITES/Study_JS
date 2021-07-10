@@ -1,3 +1,7 @@
+// import './index.html';
+// import '../css/bootstrap.min.css';
+// import '../css/style.min.css';
+
 // Modules Import
 import countTimer from './modules/countTimer';
 import toggleMenu from './modules/toggleMenu';
