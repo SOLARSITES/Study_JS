@@ -2,6 +2,7 @@
 
 import modalOrder from './modules/modalOrder';
 import modal from './modules/modal';
+import accordion from './modules/accordion';
 // import toggleMenu from './modules/toggleMenu';
 // import togglePopUp from './modules/togglePopUp';
 // import tabs from './modules/tabs';
@@ -14,6 +15,8 @@ import SliderCarousel from './modules/sliderCarousel';
 modalOrder();
 // Modal
 modal();
+// Accordion
+accordion();
 // Menu
 // toggleMenu();
 // Popup
