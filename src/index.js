@@ -1,4 +1,7 @@
 // Modules Import
+// import { disableScroll, enableScroll } from '../modules/blockScroll';
+import blockScroll from './modules/blockScroll';
+import modalOrder from './modules/modalOrder';
 // import toggleMenu from './modules/toggleMenu';
 // import togglePopUp from './modules/togglePopUp';
 // import tabs from './modules/tabs';
@@ -7,6 +10,10 @@
 // import sendForm from './modules/sendForm';
 import SliderCarousel from './modules/sliderCarousel';
 
+// Block Scroll
+blockScroll();
+// Modal Order
+modalOrder();
 // Menu
 // toggleMenu();
 // Popup
@@ -21,17 +28,13 @@ import SliderCarousel from './modules/sliderCarousel';
 // sendForm();
 // Slider Carousel
 const sliderCarousel = new SliderCarousel({
-  main: '.companies-wrapper',
-  wrap: '.companies-hor',
-  // prev: '#test-left',
-  // next: '#test-right',
-  slidesToShow: 4,
+  main: '.services-elements',
+  wrap: '.services-carousel',
+  prev: '#arrow-left',
+  next: '#arrow-right',
+  slidesToShow: 3,
   infinity: true,
   responsive: [
-    {
-      breakpoint: 1024,
-      slidesToShow: 3,
-    },
     {
       breakpoint: 768,
       slidesToShow: 2,
