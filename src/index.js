@@ -4,6 +4,7 @@ import modalOrder from './modules/modalOrder';
 import modal from './modules/modal';
 import accordion from './modules/accordion';
 import smoothScroll from './modules/smoothScroll';
+import scrollUp from './modules/scrollUp';
 // import toggleMenu from './modules/toggleMenu';
 // import togglePopUp from './modules/togglePopUp';
 // import tabs from './modules/tabs';
@@ -18,8 +19,10 @@ modalOrder();
 modal();
 // Accordion
 accordion();
-// Smooth Scroll
+// Smooth Scroll Down
 smoothScroll();
+// Smooth Scroll Up
+scrollUp();
 // Menu
 // toggleMenu();
 // Popup
