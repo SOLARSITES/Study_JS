@@ -296,9 +296,9 @@ a.absolute {
 .modal-application {
   display: none;
   position: fixed;
-  top: 60%;
+  top: 65%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  transform: translate(-50%, -65%);
   width: 460px;
   max-width: 100%;
   background: #fff;

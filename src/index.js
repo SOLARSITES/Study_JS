@@ -1,6 +1,6 @@
 // Modules Import
 // import { disableScroll, enableScroll } from '../modules/blockScroll';
-import blockScroll from './modules/blockScroll';
+// import { disableScroll, enableScroll } from './modules/blockScroll';
 import modalOrder from './modules/modalOrder';
 // import toggleMenu from './modules/toggleMenu';
 // import togglePopUp from './modules/togglePopUp';
@@ -11,7 +11,7 @@ import modalOrder from './modules/modalOrder';
 import SliderCarousel from './modules/sliderCarousel';
 
 // Block Scroll
-blockScroll();
+// disableScroll();
 // Modal Order
 modalOrder();
 // Menu
