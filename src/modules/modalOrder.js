@@ -20,9 +20,9 @@ const modalOrder = () => {
     enableScroll();
   };
 
-  servicesCarousel.addEventListener('click', (event) => {
-    event.preventDefault();
-    const target = event.target;
+  servicesCarousel.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = e.target;
 
     if (target.matches('.fancyboxModal')) {
       applicationInput.value = target.dataset.application;
@@ -30,16 +30,16 @@ const modalOrder = () => {
     }
   });
 
-  modalApplication.addEventListener('click', (event) => {
-    const target = event.target;
+  modalApplication.addEventListener('click', (e) => {
+    const target = e.target;
 
     if (target.closest('.modal-close')) {
       closeModal();
     }
   });
 
-  modalOverlay.addEventListener('click', (event) => {
-    const target = event.target;
+  modalOverlay.addEventListener('click', (e) => {
+    const target = e.target;
 
     if (target.matches('.modal-overlay')) {
       closeModal();

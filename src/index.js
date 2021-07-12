@@ -1,7 +1,7 @@
 // Modules Import
-// import { disableScroll, enableScroll } from '../modules/blockScroll';
-// import { disableScroll, enableScroll } from './modules/blockScroll';
+
 import modalOrder from './modules/modalOrder';
+import modal from './modules/modal';
 // import toggleMenu from './modules/toggleMenu';
 // import togglePopUp from './modules/togglePopUp';
 // import tabs from './modules/tabs';
@@ -10,10 +10,10 @@ import modalOrder from './modules/modalOrder';
 // import sendForm from './modules/sendForm';
 import SliderCarousel from './modules/sliderCarousel';
 
-// Block Scroll
-// disableScroll();
-// Modal Order
+// Modal Order (sliderCarousel Section)
 modalOrder();
+// Modal
+modal();
 // Menu
 // toggleMenu();
 // Popup
