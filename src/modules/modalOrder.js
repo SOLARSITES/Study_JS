@@ -2,10 +2,11 @@ import blockScroll from '../modules/blockScroll';
 
 const { disableScroll, enableScroll } = blockScroll;
 
-function modalOrder() {
+const modalOrder = () => {
   const servicesCarousel = document.querySelector('.services-carousel');
   const modalApplication = document.querySelector('.modal-application');
   const modalOverlay = document.querySelector('.modal-overlay');
+  const applicationInput = document.getElementById('applicationInput');
 
   const openModal = () => {
     modalApplication.style.display = 'block';
@@ -24,6 +25,7 @@ function modalOrder() {
     const target = event.target;
 
     if (target.matches('.fancyboxModal')) {
+      applicationInput.value = target.dataset.application;
       openModal();
     }
   });
@@ -43,6 +45,6 @@ function modalOrder() {
       closeModal();
     }
   });
-}
+};
 
 export default modalOrder;
