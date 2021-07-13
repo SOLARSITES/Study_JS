@@ -4,6 +4,13 @@
 @import url(jquery.fancybox.css);
 @import url(lightgallery.min.css);
 @import url(settings.css);
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
 body {
   font-size: 16px;
   line-height: 1.6;
@@ -873,7 +880,15 @@ hr.white {
 .top-slider .item {
   overflow: hidden;
   height: 450px;
-  position: relative;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.top-slider .top-slider-item-active {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 .top-slider .item:before {
   content: '';
@@ -888,6 +903,70 @@ hr.white {
 .top-slider .table {
   position: relative;
   z-index: 10;
+}
+.top-slider-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 44%;
+  z-index: 100;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  background-repeat: no-repeat;
+  background-size: 34px;
+  border-radius: 50%;
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.top-slider-btn.prev {
+  left: 20px;
+  background-image: url(../images/left_arrow.svg);
+  background-position: 25% 50%;
+}
+.top-slider-btn.next {
+  right: 20px;
+  background-image: url(../images/right_arrow.svg);
+  background-position: 75% 50%;
+}
+.top-slider-btn:hover {
+  background-color: rgba(233, 187, 38, 0.7);
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.top-slider-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  margin: 20px auto 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  z-index: 100;
+}
+.top-slider-dots .dot {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  margin: 0 10px;
+  border-radius: 50%;
+  border: solid #fff;
+  display: inline-block;
+  -webkit-transition: background-color, -webkit-transform 0.4s;
+  transition: background-color, transform 0.4s, -webkit-transform 0.4s;
+}
+.top-slider-dots .dot-active {
+  background-color: #e9bb26;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.top-slider-dots .dot:hover {
+  background-color: #ffca29;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
 }
 .video-block {
   height: 100%;
@@ -950,8 +1029,8 @@ video#video_background {
     height: 520px;
   }
   .top-slider .table {
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
     -webkit-transform: scale(1.5);
     -ms-transform: scale(1.5);
     -o-transform: scale(1.5);
@@ -1231,8 +1310,8 @@ video#video_background {
 
 .up {
   position: fixed;
-  bottom: 50px;
-  right: 50px;
+  bottom: 15px;
+  right: 15px;
   width: 70px;
   height: 70px;
   z-index: 300;
