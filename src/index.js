@@ -1,17 +1,11 @@
 // Modules Import
-
 import modalOrder from './modules/modalOrder';
 import modal from './modules/modal';
 import accordion from './modules/accordion';
 import smoothScroll from './modules/smoothScroll';
 import scrollUp from './modules/scrollUp';
 import slider from './modules/slider';
-// import toggleMenu from './modules/toggleMenu';
-// import togglePopUp from './modules/togglePopUp';
-// import tabs from './modules/tabs';
-// import addDot from './modules/addDot';
-// import slider from './modules/slider';
-// import sendForm from './modules/sendForm';
+import sendForm from './modules/sendForm';
 import SliderCarousel from './modules/sliderCarousel';
 
 // Modal Order (sliderCarousel Section)
@@ -26,18 +20,13 @@ smoothScroll();
 scrollUp();
 // Top Slider
 slider();
-// Menu
-// toggleMenu();
-// Popup
-// togglePopUp();
-// Tabs
-// tabs();
-// Add .dot
-// addDot();
-// Slider
-// slider();
 // Send-AJAX-Form
 // sendForm();
+
+sendForm('form1');
+sendForm('form2');
+sendForm('form3');
+
 // Slider Carousel
 const sliderCarousel = new SliderCarousel({
   main: '.services-elements',

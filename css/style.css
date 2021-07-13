@@ -298,7 +298,7 @@ a.absolute {
   max-width: 100%;
   background: #fff;
   padding: 55px 25px 35px;
-  z-index: 99;
+  z-index: 101;
 }
 .modal-application {
   display: none;
@@ -310,7 +310,7 @@ a.absolute {
   max-width: 100%;
   background: #fff;
   padding: 25px 25px 15px;
-  z-index: 99;
+  z-index: 101;
 }
 #responseMessage .modal-content.error {
   color: #2fab6d;
@@ -908,7 +908,7 @@ hr.white {
   position: absolute;
   cursor: pointer;
   top: 44%;
-  z-index: 100;
+  z-index: 78;
   width: 50px;
   height: 50px;
   background-color: rgba(0, 0, 0, 0.3);
@@ -945,7 +945,7 @@ hr.white {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 78;
 }
 .top-slider-dots .dot {
   cursor: pointer;
