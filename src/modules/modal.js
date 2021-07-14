@@ -7,8 +7,6 @@ const modal = () => {
   const modalOverlay = document.querySelector('.modal-overlay');
 
   document.addEventListener('click', (e) => {
-    e.preventDefault();
-
     if (e.target.matches('.callback-btn') || e.target.matches('.button-services')) {
       modalCallback.style.display = 'block';
       modalOverlay.style.display = 'block';

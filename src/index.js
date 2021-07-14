@@ -5,6 +5,8 @@ import accordion from './modules/accordion';
 import smoothScroll from './modules/smoothScroll';
 import scrollUp from './modules/scrollUp';
 import slider from './modules/slider';
+import maskInput from './modules/maskInput';
+import validInput from './modules/validInput';
 import sendForm from './modules/sendForm';
 import SliderCarousel from './modules/sliderCarousel';
 
@@ -20,13 +22,12 @@ smoothScroll();
 scrollUp();
 // Top Slider
 slider();
+// Mask Input
+maskInput();
+// Valid Input
+validInput();
 // Send-AJAX-Form
-// sendForm();
-
-sendForm('form1');
-sendForm('form2');
-sendForm('form3');
-
+sendForm();
 // Slider Carousel
 const sliderCarousel = new SliderCarousel({
   main: '.services-elements',

@@ -297,20 +297,20 @@ a.absolute {
   width: 460px;
   max-width: 100%;
   background: #fff;
-  padding: 55px 25px 35px;
-  z-index: 101;
+  padding: 35px 25px 15px;
+  z-index: 99;
 }
 .modal-application {
   display: none;
   position: fixed;
-  top: 65%;
+  top: 66%;
   left: 50%;
-  transform: translate(-50%, -65%);
+  transform: translate(-50%, -66%);
   width: 460px;
   max-width: 100%;
   background: #fff;
-  padding: 25px 25px 15px;
-  z-index: 101;
+  padding: 28px 25px 15px;
+  z-index: 99;
 }
 #responseMessage .modal-content.error {
   color: #2fab6d;

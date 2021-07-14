@@ -626,23 +626,32 @@
       <div class="rf">
         <form id="form1" action="" name="form-callback">
           <div class="form-group">
-            <input type="text" name="fio" class="form-control" placeholder="Ваше имя" required />
+            <input
+              type="text"
+              name="name"
+              class="form-name"
+              placeholder="Ваше имя*"
+              required
+              pattern="\D{2,}"
+            />
           </div>
 
           <div class="form-group">
             <input
-              type="text"
-              name="tel"
-              class="form-control tel required"
+              type="tel"
+              name="phone"
+              class="form-phone"
               placeholder="Телефон*"
               required
+              minlength="4"
+              pattern="[\+\-\(\)\d ]{6,}"
             />
           </div>
           <p>
             <span class="red">*</span> <span class="f12">- поля, обязательные для заполнения</span>
           </p>
           <div>
-            <input type="submit" class="button btn feedback" value="Отправить" />
+            <button type="submit" class="button btn feedback">Отправить</button>
           </div>
         </form>
       </div>
@@ -656,16 +665,25 @@
       <div class="rf">
         <form id="form2" action="" name="form-feedback">
           <div class="form-group">
-            <input type="text" name="fio" class="form-control" placeholder="Ваше имя" required />
+            <input
+              type="text"
+              name="name"
+              class="form-name"
+              placeholder="Ваше имя*"
+              required
+              pattern="\D{2,}"
+            />
           </div>
 
           <div class="form-group">
             <input
-              type="text"
-              name="tel"
-              class="form-control tel required"
+              type="tel"
+              name="phone"
+              class="form-phone"
               placeholder="Телефон*"
               required
+              minlength="4"
+              pattern="[\+\-\(\)\d ]{6,}"
             />
           </div>
 
@@ -682,7 +700,7 @@
             <span class="red">*</span> <span class="f12">- поля, обязательные для заполнения</span>
           </p>
           <div>
-            <input type="submit" class="button btn feedback" value="Отправить" />
+            <button type="submit" class="button btn feedback">Отправить</button>
           </div>
         </form>
       </div>
@@ -709,27 +727,30 @@
           </div>
           <div class="form-group">
             <input
-              name="fio"
+              name="name"
               type="text"
-              class="form-control required"
+              class="form-name"
               placeholder="Ваше имя*"
               required
+              pattern="\D{2,}"
             />
           </div>
           <div class="form-group">
             <input
-              name="tel"
-              type="text"
-              class="form-control required tel"
+              name="phone"
+              type="tel"
+              class="form-phone"
               placeholder="Ваш телефон*"
               required
+              minlength="4"
+              pattern="[\+\-\(\)\d ]{6,}"
             />
           </div>
           <p>
             <span class="red">*</span> <span class="f12">- поля, обязательные для заполнения</span>
           </p>
           <div>
-            <input type="submit" class="button btn feedback" value="Отправить" />
+            <button type="submit" class="button btn feedback">Отправить</button>
           </div>
         </form>
       </div>
