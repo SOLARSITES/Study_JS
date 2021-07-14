@@ -279,6 +279,7 @@ a.absolute {
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
   z-index: 90;
+  animation: modal 0.4s alternate ease-in-out;
 }
 .modal-close {
   width: 25px;
@@ -299,6 +300,7 @@ a.absolute {
   background: #fff;
   padding: 35px 25px 15px;
   z-index: 99;
+  animation: modal 0.4s alternate ease-in-out;
 }
 .modal-application {
   display: none;
@@ -311,6 +313,15 @@ a.absolute {
   background: #fff;
   padding: 28px 25px 15px;
   z-index: 99;
+  animation: modal 0.4s alternate ease-in-out;
+}
+@keyframes modal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 #responseMessage .modal-content.error {
   color: #2fab6d;
