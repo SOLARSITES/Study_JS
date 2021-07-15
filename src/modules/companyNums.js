@@ -6,19 +6,16 @@ const companyNums = () => {
   const num3 = document.getElementById('num3');
   const num4 = document.getElementById('num4');
 
-  console.log(num1);
-  console.log(num1.value);
-
   animate({
-    duration: 1500,
+    duration: 2000,
     timing(timeFraction) {
       return timeFraction;
     },
     draw(progress) {
-      num1.textContent = Math.floor(progress * +num1);
-      num2.textContent = Math.floor(progress * +num2);
-      num3.textContent = Math.floor(progress * +num3);
-      num4.textContent = Math.floor(progress * +num4);
+      num1.textContent = Math.floor(progress * 5000);
+      num2.textContent = Math.floor(progress * 50);
+      num3.textContent = Math.floor(progress * 30);
+      num4.textContent = Math.floor(progress * 3000);
     },
   });
 };
