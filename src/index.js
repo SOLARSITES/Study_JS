@@ -9,6 +9,7 @@ import burgerMenu from './modules/burgerMenu';
 import maskInput from './modules/maskInput';
 import validInput from './modules/validInput';
 import sendForm from './modules/sendForm';
+import companyNums from './modules/companyNums';
 import SliderCarousel from './modules/sliderCarousel';
 
 // Modal Order (sliderCarousel Section)
@@ -31,6 +32,8 @@ maskInput();
 validInput();
 // Send-AJAX-Form
 sendForm();
+// Company Nums
+companyNums();
 // Slider Carousel
 const sliderCarousel = new SliderCarousel({
   main: '.services-elements',
