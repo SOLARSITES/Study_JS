@@ -1,17 +1,18 @@
 const accordion = () => {
   const accordionElements = document.querySelectorAll('.accordeon .element');
 
-  // Переключаем элементы аккордиона
+  // Переключаем элементы аккордеона
   const toggleElement = (element, elementContent) => {
-    element.classList.toggle('active'); // включаем стили активного элемента
+    element.classList.toggle('active'); // Активируем стили активного элемента
+
     if (element.classList.contains('active')) {
-      elementContent.style.display = 'block'; // показываем контент
+      elementContent.style.display = 'block'; // Показываем контент элемента
     } else {
-      elementContent.style.display = 'none'; // скрываем контент
+      elementContent.style.display = 'none'; // Скрываем контент элемента
     }
   };
 
-  // Скрываем соседние элементы аккордиона при клике на текущий элемент
+  // Скрываем соседние элементы аккордеона при клике на текущий элемент
   const hideElements = (element) => {
     // Берем соседние элементы, исключая активный
     const notClickedElements = [...accordionElements].filter((item) => item !== element);

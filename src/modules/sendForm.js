@@ -1,3 +1,7 @@
+import blockScroll from '../modules/blockScroll';
+
+const { enableScroll } = blockScroll;
+
 const sendForm = () => {
   const postData = (body) => {
     return fetch('./server.php', {
@@ -33,8 +37,12 @@ const sendForm = () => {
     };
 
     const showStatus = (status) => {
+      const modalCallback = document.querySelector('.modal-callback');
+      const modalApplication = document.querySelector('.modal-application');
+      const modalOverlay = document.querySelector('.modal-overlay');
+
       const img = document.createElement('img');
-      const getTimeout = 5000;
+      const getTimeout = 4000;
 
       const statusList = {
         load: {
@@ -58,7 +66,13 @@ const sendForm = () => {
       statusMessage.insertBefore(img, statusMessage.firstChild);
 
       if (status === 'success' || status === 'error') {
-        interval = setInterval(clearStatus, getTimeout);
+        interval = setInterval(() => {
+          clearStatus();
+          modalApplication.style.display = 'none';
+          modalCallback.style.display = 'none';
+          modalOverlay.style.display = 'none';
+          enableScroll();
+        }, getTimeout);
       } else if (interval > 0) {
         clearInterval(interval);
       }

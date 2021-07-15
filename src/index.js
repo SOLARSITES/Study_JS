@@ -5,6 +5,7 @@ import accordion from './modules/accordion';
 import smoothScroll from './modules/smoothScroll';
 import scrollUp from './modules/scrollUp';
 import slider from './modules/slider';
+import burgerMenu from './modules/burgerMenu';
 import maskInput from './modules/maskInput';
 import validInput from './modules/validInput';
 import sendForm from './modules/sendForm';
@@ -22,6 +23,8 @@ smoothScroll();
 scrollUp();
 // Top Slider
 slider();
+// Burger Menu
+burgerMenu();
 // Mask Input
 maskInput();
 // Valid Input

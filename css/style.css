@@ -279,7 +279,7 @@ a.absolute {
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
   z-index: 90;
-  animation: modal 0.4s alternate ease-in-out;
+  animation: modal-overlay 0.4s alternate ease-in-out;
 }
 .modal-close {
   width: 25px;
@@ -314,6 +314,14 @@ a.absolute {
   padding: 28px 25px 15px;
   z-index: 99;
   animation: modal 0.4s alternate ease-in-out;
+}
+@keyframes modal-overlay {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes modal {
   0% {
@@ -451,7 +459,7 @@ a.absolute {
   -o-transition: all 200ms ease-out;
   transition: all 200ms ease-out;
 }
-.mobile-menu.open {
+.mobile-menu-open {
   right: 0;
 }
 .overlay {
@@ -468,7 +476,7 @@ a.absolute {
   -o-transition: opacity 200ms ease-out;
   transition: opacity 200ms ease-out;
 }
-.mobile-menu.open + .overlay {
+.mobile-menu-open + .overlay {
   z-index: 400;
   opacity: 1;
 }
@@ -1083,6 +1091,28 @@ video#video_background {
   padding: 20px;
   font-size: 13px;
   color: #888885;
+  animation: accordion 0.5s ease-in-out;
+}
+.accordeon .element.active {
+  animation: accordion-element 0.5s ease-in-out;
+}
+@keyframes accordion {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes accordion-element {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .accordeon .element {
   margin-bottom: 6px;
