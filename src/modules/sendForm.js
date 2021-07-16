@@ -38,6 +38,7 @@ const sendForm = () => {
 
     const showStatus = (status) => {
       const modalCallback = document.querySelector('.modal-callback');
+      const modalFeedback = document.querySelector('.modal-feedback');
       const modalApplication = document.querySelector('.modal-application');
       const modalOverlay = document.querySelector('.modal-overlay');
 
@@ -68,8 +69,9 @@ const sendForm = () => {
       if (status === 'success' || status === 'error') {
         interval = setInterval(() => {
           clearStatus();
-          modalApplication.style.display = 'none';
           modalCallback.style.display = 'none';
+          modalFeedback.style.display = 'none';
+          modalApplication.style.display = 'none';
           modalOverlay.style.display = 'none';
           enableScroll();
         }, getTimeout);

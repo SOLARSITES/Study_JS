@@ -2,7 +2,6 @@ import animate from './animate';
 
 const companyNums = () => {
   const sectionCompanyNums = document.getElementById('nums');
-  const sectionWorkScheme = document.getElementById('scheme');
   const num1 = document.getElementById('num1');
   const num2 = document.getElementById('num2');
   const num3 = document.getElementById('num3');
@@ -13,17 +12,17 @@ const companyNums = () => {
   const companyNum3 = +num3.textContent;
   const companyNum4 = +num4.textContent;
 
-  num1.textContent = 0;
-  num2.textContent = 0;
-  num3.textContent = 0;
-  num4.textContent = 0;
+  num1.textContent = 5000;
+  num2.textContent = 50;
+  num3.textContent = 30;
+  num4.textContent = 3000;
 
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset;
 
     if (
-      scrollTop >= sectionCompanyNums.offsetTop - 110 &&
-      scrollTop < sectionWorkScheme.offsetTop
+      scrollTop >= sectionCompanyNums.offsetTop - 150 &&
+      scrollTop < sectionCompanyNums.offsetTop - 100
     ) {
       setTimeout(() => {
         animate({
@@ -40,7 +39,7 @@ const companyNums = () => {
             }
           },
         });
-      }, 300);
+      }, 200);
     }
   });
 };

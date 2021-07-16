@@ -261,13 +261,6 @@ a.absolute {
 .form-group {
   position: relative;
 }
-.modal {
-  display: none;
-  width: 460px;
-  max-width: 100%;
-  background: #fff;
-  padding: 55px 25px 35px;
-}
 .modal-overlay {
   display: none;
   position: fixed;
@@ -285,20 +278,40 @@ a.absolute {
   width: 25px;
   height: 25px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   cursor: pointer;
+}
+.modal-response {
+  display: none;
+  width: 460px;
+  max-width: 100%;
+  background: #fff;
+  padding: 55px 25px 35px;
 }
 .modal-callback {
   display: none;
   position: fixed;
-  top: 20%;
+  top: 55%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -55%);
   width: 460px;
   max-width: 100%;
   background: #fff;
   padding: 35px 25px 15px;
+  z-index: 99;
+  animation: modal 0.4s alternate ease-in-out;
+}
+.modal-feedback {
+  display: none;
+  position: fixed;
+  top: 66%;
+  left: 50%;
+  transform: translate(-50%, -66%);
+  width: 460px;
+  max-width: 100%;
+  background: #fff;
+  padding: 28px 25px 15px;
   z-index: 99;
   animation: modal 0.4s alternate ease-in-out;
 }
@@ -435,6 +448,7 @@ a.absolute {
 }
 .mob-menu-btn {
   margin: 24px 5px 0 20px;
+  cursor: pointer;
 }
 .mob-menu-btn span {
   display: block;
@@ -500,8 +514,9 @@ a.absolute {
   color: #2fab6d;
 }
 .mobile-menu-close.close {
-  top: 32px;
+  top: 33px;
   right: 25px;
+  cursor: pointer;
 }
 .callback-btn {
   padding: 0 30px;
@@ -644,8 +659,10 @@ a.absolute {
   margin-bottom: 15px;
 }
 .icons .element .text {
-  font-size: 13px;
-  color: #a1b1bc;
+  /*font-size: 13px;*/
+  font-size: 15px;
+  /*color: #a1b1bc;*/
+  color: #636c73;
 }
 .dark-bg {
   background: #22282e;
@@ -1104,7 +1121,8 @@ video#video_background {
   display: none;
   padding: 20px;
   font-size: 13px;
-  color: #888885;
+  /*color: #888885;*/
+  color: inherit;
   animation: accordion 0.5s ease-in-out;
 }
 .accordeon .element.active {
@@ -1142,7 +1160,8 @@ video#video_background {
   font-size: 13px;
   letter-spacing: 0.5px;
   position: relative;
-  color: #888885;
+  /*color: #888885;*/
+  color: #787876;
   -webkit-transition: all 200ms ease-out;
   -moz-transition: all 200ms ease-out;
   -o-transition: all 200ms ease-out;
@@ -1151,6 +1170,7 @@ video#video_background {
 .accordeon .element.active .title {
   background: #e9bb26;
   color: #fff !important;
+  font-size: 15px;
 }
 .accordeon .element .title:before {
   font-family: 'FontAwesome';
