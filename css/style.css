@@ -1045,6 +1045,15 @@ video#video_background {
   }
 }
 
+@media only screen and (max-width: 370px) {
+  .mobile-menu {
+    padding-left: 7px;
+  }
+  .mobile-menu-close.close {
+    right: 15px;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .top-slider .item {
     height: 400px;
@@ -1061,10 +1070,12 @@ video#video_background {
   }
   .header-wrapper {
     height: 100px;
+    /*
     -webkit-transition: all 200ms ease-out;
     -moz-transition: all 200ms ease-out;
     -o-transition: all 200ms ease-out;
     transition: all 200ms ease-out;
+    */
   }
   .header-wrapper.hPanelHide {
     top: -36px;
