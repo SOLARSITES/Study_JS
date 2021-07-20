@@ -19,7 +19,7 @@ const validInput = () => {
           e.target.style.border = '2px solid #19fe52';
         }
 
-        // Проверяем все инпуты и блокируем кропку "Отправить", если данные некорректны
+        // Проверяем все инпуты и блокируем кнопку "Отправить", если данные некорректны
         if (Object.values(correctBase).every((item) => item)) {
           submitBtn.removeAttribute('disabled');
         } else {
@@ -64,7 +64,7 @@ const validInput = () => {
 
       e.target.value = e.target.value.replace(/^\+\d{1}\s/g, '+7 ');
 
-      // Проееряем количество цифр в телефоне
+      // Проверяем количество цифр в телефоне
       if (corrNum.length < 11) {
         correctBase.correctTel = false;
         showError(true);
