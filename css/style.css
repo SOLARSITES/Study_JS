@@ -33,6 +33,13 @@ body {
   color: #9ba2a8;
   padding: 20px 0;
 }
+.footer-wrapper_span {
+  display: block;
+  margin-bottom: 10px;
+}
+.footer-wrapper_span:last-child {
+  margin-bottom: 5px;
+}
 .footer-push {
   height: 60px;
   margin: 0;
@@ -144,6 +151,7 @@ h4 {
   font-family: 'Helios';
   font-weight: bold;
 }
+
 @media only screen and (max-width: 767px) {
   h1,
   .title-h1 {
@@ -160,6 +168,13 @@ h4 {
     font-size: 28px;
   }
 }
+
+@media only screen and (max-width: 345px) {
+  .modal-callback .title-h2 {
+    font-size: 18px;
+  }
+}
+
 .decoration-none {
   text-decoration: none !important;
 }
@@ -272,7 +287,7 @@ a.absolute {
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
   z-index: 90;
-  animation: modal-overlay 0.4s alternate ease-in-out;
+  /*animation: modal-overlay 0.4s alternate ease-in-out;*/
 }
 .modal-close {
   width: 25px;
@@ -300,7 +315,7 @@ a.absolute {
   background: #fff;
   padding: 35px 25px 15px;
   z-index: 99;
-  animation: modal 0.4s alternate ease-in-out;
+  /*animation: modal 0.4s alternate ease-in-out;*/
 }
 .modal-feedback {
   display: none;
@@ -313,7 +328,7 @@ a.absolute {
   background: #fff;
   padding: 28px 25px 15px;
   z-index: 99;
-  animation: modal 0.4s alternate ease-in-out;
+  /*animation: modal 0.4s alternate ease-in-out;*/
 }
 .modal-application {
   display: none;
@@ -326,7 +341,7 @@ a.absolute {
   background: #fff;
   padding: 28px 25px 15px;
   z-index: 99;
-  animation: modal 0.4s alternate ease-in-out;
+  /*animation: modal 0.4s alternate ease-in-out;*/
 }
 @keyframes modal-overlay {
   0% {
@@ -497,7 +512,7 @@ a.absolute {
 }
 .mobile-menu > ul > li {
   max-width: 190px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .mobile-menu > ul > li:last-child {
   margin-bottom: 0;
@@ -1039,9 +1054,35 @@ video#video_background {
   z-index: 1;
 }
 
+@media only screen and (max-width: 768px) {
+  .top-slider .item {
+    height: 400px;
+  }
+  .top-slider {
+    height: 400px;
+  }
+}
+
 @media only screen and (max-width: 576px) {
+  .top-slider .item {
+    height: 350px;
+  }
+  .top-slider {
+    height: 350px;
+  }
+  .top-slider-item .container {
+    margin-bottom: 45px;
+  }
   .top-slider-btn {
     top: 72%;
+    width: 40px;
+    height: 40px;
+    background-size: 27px;
+  }
+  .top-slider-dots .dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 7px;
   }
 }
 
@@ -1056,10 +1097,10 @@ video#video_background {
 
 @media only screen and (min-width: 768px) {
   .top-slider .item {
-    height: 400px;
+    height: 450px;
   }
   .top-slider {
-    height: 400px;
+    height: 450px;
   }
   .header-push {
     height: 100px;
@@ -1134,15 +1175,15 @@ video#video_background {
   font-size: 13px;
   /*color: #888885;*/
   color: inherit;
-  animation: accordion 0.5s ease-in-out;
+  animation: accordion 0.2s ease-in-out;
 }
 .accordeon .element.active {
-  animation: accordion-element 0.5s ease-in-out;
+  animation: accordion-element 0.2s ease-in-out;
 }
 @keyframes accordion {
   0% {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-7px);
   }
   100% {
     opacity: 1;
@@ -1151,7 +1192,7 @@ video#video_background {
 }
 @keyframes accordion-element {
   0% {
-    opacity: 0.5;
+    opacity: 0;
   }
   100% {
     opacity: 1;
@@ -1173,15 +1214,16 @@ video#video_background {
   position: relative;
   /*color: #888885;*/
   color: #787876;
-  -webkit-transition: all 200ms ease-out;
-  -moz-transition: all 200ms ease-out;
-  -o-transition: all 200ms ease-out;
-  transition: all 200ms ease-out;
 }
 .accordeon .element.active .title {
   background: #e9bb26;
   color: #fff !important;
   font-size: 15px;
+  transition-property: font-size;
+  -webkit-transition: font-size 0.2s ease-in-out;
+  -moz-transition: font-size 0.2s ease-in-out;
+  -o-transition: font-size 0.2s ease-in-out;
+  transition: font-size 0.2s ease-in-out;
 }
 .accordeon .element .title:before {
   font-family: 'FontAwesome';
@@ -1196,13 +1238,14 @@ video#video_background {
   color: #fff;
   text-align: center;
   line-height: 50px;
-  -webkit-transition: all 200ms ease-out;
-  -moz-transition: all 200ms ease-out;
-  -o-transition: all 200ms ease-out;
-  transition: all 200ms ease-out;
 }
 .accordeon .element.active .title:before {
   background: url(../images/minus.png) 50% 50% no-repeat #333;
+  transition-property: background;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .accordeon > div:first-of-type .element-content {
   display: block;
@@ -1405,6 +1448,22 @@ video#video_background {
   padding: 0 2px;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media only screen and (max-width: 576px) {
+  .up {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media only screen and (max-width: 478px) {
+  .up {
+    bottom: 12px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+  }
 }
 
 @media only screen and (min-width: 992px) {
